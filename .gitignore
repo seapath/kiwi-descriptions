@@ -1,0 +1,10 @@
+/build
+
+# Build artifacts
+*.raw
+*.iso
+*.changes
+*.packages
+*.verified
+*.result
+*.result.json
