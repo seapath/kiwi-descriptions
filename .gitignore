@@ -1,5 +1,8 @@
 /build
 
+# SLES credentials
+.cqfd/sles15.7/SCCcredentials
+
 # Build artifacts
 *.raw
 *.iso

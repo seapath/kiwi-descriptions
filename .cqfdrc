@@ -1,0 +1,8 @@
+[project]
+org='seapath'
+name='seapath-kiwi'
+flavors=''
+
+[build]
+distro='sles15.7'
+command='sudo kiwi-ng --help'
