@@ -1,8 +1,12 @@
 [project]
 org='seapath'
 name='seapath-kiwi'
-flavors=''
+flavors='sles-seapath-hypervisor'
 
 [build]
 distro='sles15.7'
 command='sudo kiwi-ng --help'
+
+[sles-seapath-hypervisor]
+distro='sles15.7'
+command='./build.sh -s kiwi-descriptions/x86_64/sles/seapath-sles15-sp7'

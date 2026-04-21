@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="8.0" name="seapath-sles15-sp7">
+    <description type="system">
+        <author>Elinor Montmasson</author>
+        <contact>elinor.montmasson@savoirfairelinux.com</contact>
+        <specification>Seapath hypervisor SLES15-SP7 distribution</specification>
+    </description>
+
+    <preferences>
+        <version>0.1.0</version>
+        <packagemanager>zypper</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>Europe/Paris</timezone>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <rpm-check-signatures>false</rpm-check-signatures>
+
+        <type image="oem"
+              filesystem="ext4"
+              kernelcmdline="console=ttyS0"
+              installiso="true"
+              installboot="install"
+              efipartsize="128"
+              firmware="uefi">
+
+            <oemconfig>
+                <oem-unattended>true</oem-unattended>
+                <oem-resize>false</oem-resize>
+                <oem-skip-verify>true</oem-skip-verify>
+            </oemconfig>
+
+            <systemdisk name="vg1">
+                <volume name="@root"    size="15G"/>
+                <volume name="varlog"  mountpoint="/var/log" size="5G"/>
+            </systemdisk>
+
+            <bootloader name="grub2" console="serial" timeout="10"/>
+
+        </type>
+    </preferences>
+
+    <users>
+        <user password="$6$PQEKx.SYxPsjMtOl$Zgbbr0VsRWxMYtEDpZJN5.IyXDaWb8fq9r.Dn8oOWZ4PwHFFqCYODhSnAqP8DG4FcXizFYFRkOPr.r1LHvHpD." home="/root" name="root" groups="root"/>
+    </users>
+
+    <!-- SLES repositories are set by build.sh -->
+
+    <packages type="image">
+
+        <!-- Kernel / EFI / Boot -->
+        <package name="efibootmgr"/>
+        <package name="grub2-x86_64-efi"/>
+        <package name="grub2"/>
+        <package name="kernel-default"/>
+        <package name="kernel-firmware"/>
+        <package name="shim"/>
+
+        <!-- System base -->
+        <package name="at"/>
+        <package name="busybox"/>
+        <package name="ca-certificates"/>
+        <package name="dbus-1"/>
+        <package name="dracut-kiwi-oem-dump"/>
+        <package name="dracut-kiwi-oem-repart"/>
+        <package name="dracut"/>
+        <package name="e2fsprogs"/>
+        <package name="lvm2"/>
+        <package name="parted"/>
+        <package name="patch"/>
+        <package name="shadow"/>
+        <package name="sudo"/>
+        <package name="sysfsutils"/>
+        <package name="sysstat"/>
+        <package name="systemd-networkd"/>
+        <package name="systemd"/>
+        <package name="timezone"/>
+        <package name="udev"/>
+        <package name="util-linux"/>
+
+        <!-- Networking / SSH -->
+        <package name="bridge-utils"/>
+        <package name="conntrack-tools"/>
+        <package name="iproute2"/>
+        <package name="iptables"/>
+        <package name="iputils"/>
+        <package name="net-tools"/>
+        <package name="openssh-server"/>
+        <package name="openssh"/>
+        <package name="openvswitch"/>
+
+        <!-- Time synchronisation (IEEE 1588 / PTP capable) -->
+        <package name="chrony"/>
+        <package name="linuxptp"/>
+
+        <!-- Security: audit + AppArmor -->
+        <package name="apparmor-parser"/>
+        <package name="apparmor-utils"/>
+        <package name="audit-audispd-plugins"/>
+        <package name="audit"/>
+
+        <!-- Logging -->
+        <package name="syslog-ng"/>
+
+        <!-- Virtualization -->
+        <package name="libvirt-client"/>
+        <package name="libvirt-daemon-driver-storage-rbd"/>
+        <package name="libvirt-daemon"/>
+        <package name="libvirt"/>
+        <package name="ovmf"/>
+        <package name="qemu-block-curl"/>
+        <package name="qemu-block-rbd"/>
+        <package name="qemu-kvm"/>
+        <package name="qemu-tools"/>
+        <package name="qemu-x86"/>
+        <package name="virt-install"/>
+
+        <!-- Containers -->
+        <package name="docker-compose"/>
+        <package name="docker"/>
+
+        <!-- Management services -->
+        <package name="ipmitool"/>
+        <package name="net-snmp"/>
+
+        <!-- Python 3 -->
+        <package name="python3-cffi"/>
+        <package name="python3-pip"/>
+        <package name="python3-setuptools"/>
+        <package name="python3"/>
+
+        <!-- Tools -->
+        <package name="bzip2"/>
+        <package name="curl"/>
+        <package name="gpg2"/>
+        <package name="irqbalance"/>
+        <package name="jq"/>
+        <package name="libxml2-tools"/>
+        <package name="lsb-release"/>
+        <package name="ntfs-3g"/>
+        <package name="perf"/>
+        <package name="sensors"/>
+        <package name="tuned"/>
+        <package name="vim"/>
+        <package name="wget"/>
+
+    </packages>
+
+    <packages type="bootstrap">
+        <package name="ca-certificates-mozilla"/>
+        <package name="ca-certificates"/>
+        <package name="cracklib-dict-full"/>
+        <package name="filesystem"/>
+        <package name="glibc-locale"/>
+        <package name="udev"/>
+    </packages>
+
+</image>
