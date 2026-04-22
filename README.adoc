@@ -1,0 +1,210 @@
+Seapath SLES
+============
+:toc:
+:sectnumlevels: 1
+
+
+== Introduction
+
+This repository contains image descriptions, also called appliances, to build SEAPATH images using
+https://osinside.github.io/kiwi/[KIWI NG].
+
+Currently, this repository provides image descriptions for the following SEAPATH flavors:
+* SEAPATH SLES 15 SP7
+
+
+== Prerequisites
+
+=== Build with CQFD (recommended)
+
+KIWI-NG relies on the tools installed on the build system. Therefore, the build and target
+distributions must match to provide the same package manager.
+
+To provide a distribution agnostic build, this repository wraps the build process
+in a container using https://github.com/savoirfairelinux/cqfd[CQFD].
+
+NOTE: We recommend using this method as it greatly simplifies the build environment setup and
+configuration and allows building on a distribution different from the target distribution.
+
+==== Install CQFD
+
+* Install `docker` if it is not already done.
+
+On Ubuntu, please run:
+
+  $ sudo apt-get install docker.io
+
+For other distributions, please refer to the https://docs.docker.com/engine/install/[Docker install documentation].
+
+* Install `cqfd`:
+
+On Ubuntu, please run:
+
+  $ curl -LO https://github.com/savoirfairelinux/cqfd/releases/download/v5.9.0/cqfd_5.9.0_all.deb
+  $ sudo apt install ./cqfd_5.9.0_all.deb
+
+For other distributions, please refer to the https://github.com/savoirfairelinux/cqfd#installingremoving-cqfd[CQFD install instructions].
+
+The project page on https://github.com/savoirfairelinux/cqfd[Github] contains
+detailed information on usage and installation.
+
+* Make sure that `docker` does not require `sudo`
+
+Please use the following commands to add your user account to the `docker`
+group:
+
+  $ sudo groupadd docker
+  $ sudo usermod -aG docker $USER
+
+Log out and log back in, so that your group membership can be re-evaluated.
+
+=== Build without CQFD
+
+If your build system distribution matche the target distribution, you can build without CQFD.
+In that case:
+
+* Install `kiwi-ng` and others build dependencies mentioned by the CQFD Dockerfile in `.cqfd` corresponding to your distribution.
+* Run the `build.sh` command for the corresponding target SEAPATH distribution as configured in `.cqfdrc`.
+
+NOTE: This documentation doesn't cover in detail the build process without CQFD.
+
+[#sle-registration]
+=== Activate SUSE Linux Enterprise Server registration (only for SEAPATH SLES)
+
+When building SEAPATH SLES images, you need to have an active SUSE Linux Enterprise Server registration on the build system.
+This is required to access the necessary repositories and packages for the build process.
+
+==== When building with CQFD
+
+When building with CQFD, you must first manually register to the SUSE Customer Center using an SLES
+registration code and retrieve the credentials generated in the `/etc/zypp/credentials.d/SCCcredentials`.
+
+This can be done with a using the official SLES docker image:
+
+  $ docker run --rm registry.suse.com/suse/sle15:latest bash -c " \
+        zypper -n in SUSEConnect; \
+        SUSEConnect --regcode <your-registration-code> -p SLES/<version>/x86_64; \
+        cat /etc/zypp/credentials.d/SCCcredentials"
+
+For exemple, if building for SEAPATH SLES 15 SP7, you should run:
+
+  $ docker run --rm registry.suse.com/suse/sle15:latest bash -c " \
+        zypper -n in SUSEConnect; \
+        SUSEConnect --regcode <your-registration-code> -p SLES/15.7/x86_64; \
+        cat /etc/zypp/credentials.d/SCCcredentials"
+
+Then copy the credentials to `.cqfd/sles<version>/SCCcredentials`. The credentials are printed
+after the "Successfully registered system" and has the following format:
+
+```
+username=<SCC-usernam>
+password=<SCC-password>
+system_token=<token>
+```
+
+Once the `SCCcredentials` file is generated and placed in the correct .cqfd directory,
+CQFD will automatically use it to connect to the SUSE Customer Center during
+container initialization. This is internally done by the `container-suseconnect` utility.
+
+For more information on `container-suseconnect` configuration, please refer to the
+https://opensource.suse.com/bci-docs/guides/container-suseconnect/["How to use container-suseconnect"]
+documentation.
+
+==== When building without CQFD
+
+When building without CQFD, you can directly register to the SUSE Customer Center on the build system
+using the `SUSEConnect` command-line tool:
+
+  $ SUSEConnect --regcode <your-registration-code> -p SLES/<version>/x86_64
+
+For more information about SLE registration, please refer to the
+https://documentation.suse.com/fr-fr/sles/15-SP6/html/SLES-all/cha-register-sle.html[official SUSE documentation].
+
+NOTE: This method is available only if the build system is running a SUSE Linux Enterprise Server distribution.
+
+=== Install a flashing tool
+
+Tools like `dd`, `bmap-tools` or `balena-etcher` can be used to manually flash the built image on a disk.
+We recommend using `bmap-tools` for better performances.
+
+
+== Build a SEAPATH image
+
+=== Available images
+
+The following instructions suppose that you are building with CQFD.
+
+Identify the CQFD flavor corresponding to the SEAPATH image you want to build.
+For now the following flavors are available:
+
+* `sles-seapath-hypervisor`: SEAPATH SLES 15 SP7 hypervisors image.
+
+NOTE: When building a SLES based SEAPATH image, make sure to first configure your SLE registration.
+See the <<sle-registration>> section.
+
+=== Building the image
+
+* Initialize CQFD. For SLES builds, this automatically import the provided SLE credentials.
+
+  $ cqfd -b <cqfd-flavor> init
+
+For exemple, when building the SEAPATH SLES 15 SP7 hypervisors image;
+
+  $ cqfd -b sles-seapath-hypervisor init
+
+* Build the image.
+
+  $ cqfd -b <cqfd-flavor>
+
+For exemple, when building the SEAPATH SLES 15 SP7 hypervisors image;
+
+  $ cqfd -b sles-seapath-hypervisor
+
+
+=== Installing the image
+
+The build process may output one of the following image file:
+
+* `seapath-<distribution>.<architecture>-<kiwi-appliance-version>.install.iso`
+** This is an auto-installation media that can be flashed on a USB stick.
+* `seapath-<distribution>.<architecture>-<kiwi-appliance-version>.raw`
+** This is the raw image, ready to be flashed on a disk with tools such as `dd` or `bmap-tools`.
+
+==== With an auto-installation media (recommended)
+
+If the build created a `*.install.iso` file, it produced an auto-installation media that can be
+flashed on a USB stick and booted on the target hardware to automatically install the SEAPATH image.
+
+* Flash the .iso with `dd` on a USB stick:
+
+  $ sudo dd if=<seapath-image-name>.install.iso of=/dev/<usb-stick-disk> bs=4M status=progress
+
+* Insert the USB stick in the target hardware.
+* Boot on the USB stick and wait for the installation process to complete and reboot
+on the newly installed SEAPATH image.
+
+NOTE: The auto-installation prcess doesn't provide any visual feedback (GUI or console)!
+
+NOTE: BalenaEtcher can also be used to flash .iso files on USB sticks with a user-friendly interface.
+Please refer to the https://etcher.balena.io/#download-etcher[BalenaEtcher website] for installation and usage instructions.
+
+==== With a raw image
+
+If you have direct access to the target storage disk on the hardware, you can directly flash
+the `*.raw` image on the disk with tools such as `dd` or `bmap-tools`.
+We recommend using `bmap-tools` for faster flashing.
+
+* Install the `bmap-tools` package on the distribution accessing the target storage disk.
+* Flash the .raw image:
+
+    $ sudo bmaptool copy <seapath-image-name>.raw /dev/<target-disk>
+
+* Boot on the flashed disk on the target hardware.
+
+
+== Configuring the system with SEAPATH Ansible
+
+Flashing the image is the first step to deploy SEAPATH.
+The SEAPATH Ansible playbooks and roles must then be used to configure and manage SEAPATH.
+
+See the https://github.com/seapath/ansible[SEAPATH Ansible repository] for more information on how to use SEAPATH Ansible.
