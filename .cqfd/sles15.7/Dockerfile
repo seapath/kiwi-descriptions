@@ -13,6 +13,7 @@ RUN zypper --gpg-auto-import-keys refresh && zypper install -y --no-recommends \
     jing \
     kiwi-systemdeps-iso-media \
     kpartx \
+    lvm2 \
     python311 \
     python311-kiwi \
     sudo \
