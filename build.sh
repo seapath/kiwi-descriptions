@@ -51,7 +51,12 @@ EOF
         ;;
     --)
         shift
-        KIWI_DESCRIPTION="$1"
+        if [ -d "$1" ]; then
+            KIWI_DESCRIPTION="$1"
+        else
+            log error "Invalid KIWI description directory: $1"
+            exit 1
+        fi
         break
         ;;
     *)
