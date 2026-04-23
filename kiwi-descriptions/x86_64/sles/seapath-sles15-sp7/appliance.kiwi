@@ -52,7 +52,7 @@
         <package name="efibootmgr"/>
         <package name="grub2-x86_64-efi"/>
         <package name="grub2"/>
-        <package name="kernel-default"/>
+        <package name="kernel-rt"/>
         <package name="kernel-firmware"/>
         <package name="shim"/>
 
@@ -79,7 +79,6 @@
         <package name="util-linux"/>
 
         <!-- Networking / SSH -->
-        <package name="bridge-utils"/>
         <package name="conntrack-tools"/>
         <package name="iproute2"/>
         <package name="iptables"/>
@@ -151,6 +150,7 @@
         <package name="ca-certificates"/>
         <package name="cracklib-dict-full"/>
         <package name="filesystem"/>
+        <package name="SLE_RT-release"/>
         <package name="glibc-locale"/>
         <package name="udev"/>
     </packages>
