@@ -38,7 +38,7 @@ EOF
         exit 0
         ;;
     -s|--add-sle)
-        if cat /etc/os-release | grep -q 'NAME="SLES"'; then
+        if cat /etc/os-release | grep -q 'NAME="SLE.*"'; then
             ADD_SLE_REPOS=1
         else
             log error "The --add-sle option is only relevant for SLE-based appliances. Ignoring."
