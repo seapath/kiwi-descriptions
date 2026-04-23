@@ -13,3 +13,7 @@ chmod 0600 /home/admin/.ssh/authorized_keys
 chmod 0600 /home/ansible/.ssh/authorized_keys
 
 baseService sshd on
+
+# Network
+
+baseService systemd-networkd on
