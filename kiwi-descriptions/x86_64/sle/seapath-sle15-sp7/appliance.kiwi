@@ -42,6 +42,8 @@
 
     <users>
         <user password="$6$PQEKx.SYxPsjMtOl$Zgbbr0VsRWxMYtEDpZJN5.IyXDaWb8fq9r.Dn8oOWZ4PwHFFqCYODhSnAqP8DG4FcXizFYFRkOPr.r1LHvHpD." home="/root" name="root" groups="root"/>
+        <user password="$y$j9T$FM5xf5gw4abf1XJXHW6eL.$oE89ZT2VyNb2d6OnICr6Fbo.9xdF9Dl5Wve8ZX/Amn2" name="admin" id="1000" groups="admin"/>
+        <user password="$y$j9T$MjGgbn1hzS0PsAfUhzkBI1$xkJgL7uCsUbt4vSS/YHCX1lHhS6j2lRp9DddBgakQu4" name="ansible" id="1005" groups="ansible"/>
     </users>
 
     <!-- SLE repositories are set by build.sh -->
