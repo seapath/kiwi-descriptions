@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<image schemaversion="8.0" name="seapath-sles15-sp7">
+<image schemaversion="8.0" name="seapath-sle15-sp7">
     <description type="system">
         <author>Elinor Montmasson</author>
         <contact>elinor.montmasson@savoirfairelinux.com</contact>
-        <specification>Seapath hypervisor SLES15-SP7 distribution</specification>
+        <specification>Seapath hypervisor SLE 15-SP7 distribution</specification>
     </description>
 
     <preferences>
@@ -44,7 +44,7 @@
         <user password="$6$PQEKx.SYxPsjMtOl$Zgbbr0VsRWxMYtEDpZJN5.IyXDaWb8fq9r.Dn8oOWZ4PwHFFqCYODhSnAqP8DG4FcXizFYFRkOPr.r1LHvHpD." home="/root" name="root" groups="root"/>
     </users>
 
-    <!-- SLES repositories are set by build.sh -->
+    <!-- SLE repositories are set by build.sh -->
 
     <packages type="image">
 

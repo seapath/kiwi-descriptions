@@ -140,7 +140,7 @@ The following instructions suppose that you are building with CQFD.
 Identify the CQFD flavor corresponding to the SEAPATH image you want to build.
 For now the following flavors are available:
 
-* `sles-seapath-hypervisor`: SEAPATH SLE 15 SP7 hypervisors image.
+* `sle-seapath-hypervisor`: SEAPATH SLE 15 SP7 hypervisors image.
 
 NOTE: When building a SLE based SEAPATH image, make sure to first configure your SLE registration.
 See the <<sle-registration>> section.
@@ -153,7 +153,7 @@ See the <<sle-registration>> section.
 
 For exemple, when building the SEAPATH SLE 15 SP7 hypervisors image;
 
-  $ cqfd -b sles-seapath-hypervisor init
+  $ cqfd -b sle-seapath-hypervisor init
 
 * Build the image.
 
@@ -161,7 +161,7 @@ For exemple, when building the SEAPATH SLE 15 SP7 hypervisors image;
 
 For exemple, when building the SEAPATH SLE 15 SP7 hypervisors image;
 
-  $ cqfd -b sles-seapath-hypervisor
+  $ cqfd -b sle-seapath-hypervisor
 
 
 === Installing the image
