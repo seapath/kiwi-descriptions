@@ -1,6 +1,8 @@
 /build
 .vscode/
 
+keys/*
+
 # SLES credentials
 .cqfd/sles15.7/SCCcredentials
 

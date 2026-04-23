@@ -133,6 +133,24 @@ We recommend using `bmap-tools` for better performances.
 
 == Build a SEAPATH image
 
+=== Configuring SSH keys
+
+SEAPATH configure two main users: `admin` and `ansible`.
+These users only accept login via an SSH session using SSH keys.
+
+In the `keys/` directory, put the SSH public keys you wish to use in the following files:
+
+* `admin_public_ssh_key.pub`: public keys used to login with the `admin` user.
+* `ansible_public_ssh_key.pub`: public keys used to login with the `ansible` user.
+
+To quickly generate and use an SSH key on your local system:
+
+* Generate an SSH key pair with the `ssh-keygen` command.
+* Copy the generate `*.pub` file in keys:
+
+  $ cp <ssh-key-name>.pub keys/admin_public_ssh_key.pub
+  $ cp <ssh-key-name>.pub keys/ansible_public_ssh_key.pub
+
 === Available images
 
 The following instructions suppose that you are building with CQFD.

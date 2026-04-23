@@ -87,6 +87,24 @@ if [ -n "$ADD_SLE_REPOS" ]; then
     done
 fi
 
+# Add SSH keys to root overlay
+
+if [ -f keys/admin_public_ssh_key.pub ]; then
+    mkdir -p $KIWI_DESCRIPTION/root/home/admin/.ssh
+    cp keys/admin_public_ssh_key.pub $KIWI_DESCRIPTION/root/home/admin/.ssh/authorized_keys
+else
+    log error "keys/admin_public_ssh_key.pub doesn't exist!"
+    exit 1
+fi
+
+if [ -f keys/ansible_public_ssh_key.pub ]; then
+    mkdir -p $KIWI_DESCRIPTION/root/home/ansible/.ssh
+    cp keys/ansible_public_ssh_key.pub $KIWI_DESCRIPTION/root/home/ansible/.ssh/authorized_keys
+else
+    log error "keys/ansible_public_ssh_key.pub doesn't exist!"
+    exit 1
+fi
+
 # Build image
 sudo kiwi-ng system build $KIWI_BUILD_ARGS $KIWI_EXTRA_ARGS
 
