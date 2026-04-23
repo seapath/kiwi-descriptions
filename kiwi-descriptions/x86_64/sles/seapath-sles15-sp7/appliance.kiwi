@@ -18,7 +18,7 @@
 
         <type image="oem"
               filesystem="ext4"
-              kernelcmdline="console=ttyS0"
+              kernelcmdline="console=ttyS0 console=tty0 efi=runtime ipv6.disable=1"
               installiso="true"
               installboot="install"
               efipartsize="128"
