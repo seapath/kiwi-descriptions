@@ -17,3 +17,5 @@ baseService sshd on
 # Network
 
 baseService systemd-networkd on
+baseService systemd-networkd-wait-online off
+baseService systemd-resolved on

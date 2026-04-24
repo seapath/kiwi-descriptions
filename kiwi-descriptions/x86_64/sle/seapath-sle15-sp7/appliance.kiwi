@@ -62,6 +62,7 @@
         <package name="at"/>
         <package name="busybox"/>
         <package name="ca-certificates"/>
+        <package name="cpuset"/>
         <package name="dbus-1"/>
         <package name="dracut-kiwi-oem-dump"/>
         <package name="dracut-kiwi-oem-repart"/>
@@ -72,11 +73,14 @@
         <package name="patch"/>
         <package name="shadow"/>
         <package name="sudo"/>
+        <package name="suseconnect-ng"/>
         <package name="sysfsutils"/>
         <package name="sysstat"/>
         <package name="systemd-networkd"/>
         <package name="systemd"/>
         <package name="timezone"/>
+        <package name="ucode-amd"/>
+        <package name="ucode-intel"/>
         <package name="udev"/>
         <package name="util-linux"/>
 
@@ -89,6 +93,7 @@
         <package name="openssh-server"/>
         <package name="openssh"/>
         <package name="openvswitch"/>
+        <package name="systemd-resolved"/>
 
         <!-- Time synchronisation (IEEE 1588 / PTP capable) -->
         <package name="chrony"/>
