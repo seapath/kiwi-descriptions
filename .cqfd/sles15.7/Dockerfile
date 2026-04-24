@@ -13,6 +13,7 @@ ADD SCCcredentials /etc/zypp/credentials.d/SCCcredentials
 ENV ADDITIONAL_MODULES=sle-module-rt,sle-module-development-tools,sle-module-server-applications,PackageHub
 
 RUN zypper --gpg-auto-import-keys refresh && zypper install -y --no-recommends \
+    awk \
     binutils \
     gptfdisk \
     jing \
