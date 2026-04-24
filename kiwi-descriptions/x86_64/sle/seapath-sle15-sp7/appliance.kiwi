@@ -122,8 +122,9 @@
         <package name="virt-install"/>
 
         <!-- Containers -->
-        <package name="docker-compose"/>
-        <package name="docker"/>
+        <package name="podman-docker"/>
+        <package name="podman"/>
+        <package name="python311-podman-compose"/>
 
         <!-- Management services -->
         <package name="ipmitool"/>
