@@ -4,7 +4,7 @@
 keys/*
 
 # SLES credentials
-.cqfd/sles15.7/SCCcredentials
+SCCcredentials
 
 # Build artifacts
 *.raw

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="8.0" name="seapath-sles16.0">
+    <description type="system">
+        <author>Elinor Montmasson</author>
+        <contact>elinor.montmasson@savoirfairelinux.com</contact>
+        <specification>Seapath hypervisor SLE 16 distribution</specification>
+    </description>
+
+    <profiles>
+        <profile name="hypervisor" description="SEAPATH hypervisor"/>
+
+        <profile name="cluster" description="SEAPATH cluster machine"/>
+        <profile name="observer" description="SEAPATH cluster observer">
+            <requires profile="cluster"/>
+        </profile>
+
+        <profile name="cockpit" description="SEAPATH hypervisor with cockpit service"/>
+    </profiles>
+
+    <preferences>
+        <version>0.1.0</version>
+        <packagemanager>zypper</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <timezone>Europe/Paris</timezone>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <rpm-check-signatures>false</rpm-check-signatures>
+
+        <type image="oem"
+              bootpartition="false"
+              filesystem="ext4"
+              kernelcmdline="console=ttyS0 console=tty0 efi=runtime ipv6.disable=1"
+              installiso="true"
+              installboot="install"
+              efipartsize="128"
+              firmware="efi">
+
+            <oemconfig>
+                <oem-unattended>true</oem-unattended>
+                <oem-resize>false</oem-resize>
+                <oem-skip-verify>true</oem-skip-verify>
+            </oemconfig>
+
+            <systemdisk name="vg1">
+                <volume name="@root=root" size="15G"/>
+                <volume name="varlog" mountpoint="/var/log" size="5G"/>
+            </systemdisk>
+
+            <bootloader name="grub2" console="console" timeout="10"/>
+
+        </type>
+    </preferences>
+
+    <users>
+        <user password="$6$PQEKx.SYxPsjMtOl$Zgbbr0VsRWxMYtEDpZJN5.IyXDaWb8fq9r.Dn8oOWZ4PwHFFqCYODhSnAqP8DG4FcXizFYFRkOPr.r1LHvHpD." home="/root" name="root" groups="root"/>
+        <user password="$y$j9T$FM5xf5gw4abf1XJXHW6eL.$oE89ZT2VyNb2d6OnICr6Fbo.9xdF9Dl5Wve8ZX/Amn2" name="admin" id="1000" groups="admin"/>
+        <user password="$y$j9T$MjGgbn1hzS0PsAfUhzkBI1$xkJgL7uCsUbt4vSS/YHCX1lHhS6j2lRp9DddBgakQu4" name="ansible" id="1005" groups="ansible"/>
+    </users>
+
+    <!-- SLE repositories are set by build.sh -->
+
+    <packages type="image">
+
+        <!-- Kernel / EFI / Boot -->
+        <package name="efibootmgr"/>
+        <package name="grub2-x86_64-efi"/>
+        <package name="grub2"/>
+        <package name="kernel-rt"/>
+        <package name="kernel-firmware-all"/>
+        <package name="shim"/>
+
+        <!-- System base -->
+        <package name="at"/>
+        <package name="busybox"/>
+        <package name="ca-certificates"/>
+        <package name="cpuset"/>
+        <package name="dbus-1"/>
+        <package name="dracut-kiwi-oem-dump"/>
+        <package name="dracut-kiwi-oem-repart"/>
+        <package name="dracut"/>
+        <package name="e2fsprogs"/>
+        <package name="lvm2"/>
+        <package name="parted"/>
+        <package name="patch"/>
+        <package name="shadow"/>
+        <package name="sudo"/>
+        <package name="suseconnect-ng"/>
+        <package name="sysfsutils"/>
+        <package name="sysstat"/>
+        <package name="systemd-networkd"/>
+        <package name="systemd"/>
+        <package name="timezone"/>
+        <package name="ucode-amd"/>
+        <package name="ucode-intel"/>
+        <package name="udev"/>
+        <package name="util-linux"/>
+
+        <!-- Networking / SSH -->
+        <package name="conntrack-tools"/>
+        <package name="iproute2"/>
+        <package name="iptables"/>
+        <package name="iputils"/>
+        <package name="net-tools"/>
+        <package name="openssh-server"/>
+        <package name="openssh"/>
+        <package name="openvswitch"/>
+        <package name="systemd-resolved"/>
+
+        <!-- Time synchronisation (IEEE 1588 / PTP capable) -->
+        <package name="chrony"/>
+        <package name="linuxptp"/>
+
+        <!-- Security: audit + AppArmor -->
+        <package name="apparmor-parser"/>
+        <package name="apparmor-utils"/>
+        <package name="audit-audispd-plugins"/>
+        <package name="audit"/>
+
+        <!-- Logging -->
+        <package name="syslog-ng"/>
+
+        <!-- Containers -->
+        <package name="podman-docker"/>
+        <package name="podman"/>
+
+        <!-- Management services -->
+        <package name="ipmitool"/>
+        <package name="net-snmp"/>
+
+        <!-- Python 3 -->
+        <package name="python313-cffi"/>
+        <package name="python313-pip"/>
+        <package name="python313-setuptools"/>
+        <package name="python313"/>
+
+        <!-- Tools -->
+        <package name="bzip2"/>
+        <package name="curl"/>
+        <package name="gpg2"/>
+        <package name="irqbalance"/>
+        <package name="jq"/>
+        <package name="libxml2-tools"/>
+        <package name="lsb-release"/>
+        <package name="ntfs-3g"/>
+        <package name="perf"/>
+        <package name="rt-tests"/>
+        <package name="sensors"/>
+        <package name="tuned"/>
+        <package name="vim"/>
+        <package name="wget"/>
+
+    </packages>
+
+    <packages type="image" profiles="hypervisor">
+
+        <!-- Virtualization -->
+        <package name="libvirt-client"/>
+        <package name="libvirt-client-qemu"/>
+        <package name="libvirt-daemon"/>
+        <package name="libvirt-daemon-config-network"/>
+        <package name="libvirt-daemon-config-nwfilter"/>
+        <package name="libvirt-daemon-driver-network"/>
+        <package name="libvirt-daemon-driver-nodedev"/>
+        <package name="libvirt-daemon-driver-nwfilter"/>
+        <package name="libvirt-daemon-driver-qemu"/>
+        <package name="libvirt-daemon-driver-secret"/>
+        <package name="libvirt-daemon-driver-storage"/>
+        <package name="ovmf"/>
+        <package name="qemu-block-curl=10.0.8"/>
+        <package name="qemu-block-rbd=10.0.8"/>
+        <package name="qemu-tools=10.0.8"/>
+        <package name="qemu-x86=10.0.8"/>
+        <package name="virt-install"/>
+
+    </packages>
+
+    <packages type="bootstrap">
+        <package name="ca-certificates-mozilla"/>
+        <package name="ca-certificates"/>
+        <package name="cracklib-dict-full"/>
+        <package name="filesystem"/>
+        <package name="sles-release"/>
+        <package name="glibc-locale"/>
+        <package name="udev"/>
+    </packages>
+
+</image>
