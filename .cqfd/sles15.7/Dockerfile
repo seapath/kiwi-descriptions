@@ -10,7 +10,7 @@ ADD SLE_RT.prod /etc/products.d/SLE_RT.prod
 RUN ln -s SLE_RT.prod /etc/products.d/baseproduct
 
 ADD SCCcredentials /etc/zypp/credentials.d/SCCcredentials
-ENV ADDITIONAL_MODULES=sle-module-rt,sle-module-development-tools,sle-module-server-applications,PackageHub
+ENV ADDITIONAL_MODULES=sle-module-rt,sle-module-development-tools,sle-module-server-applications,sle-module-containers,PackageHub
 
 RUN zypper --gpg-auto-import-keys refresh && zypper install -y --no-recommends \
     awk \
