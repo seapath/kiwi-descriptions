@@ -8,6 +8,8 @@ keys/*
 
 # Build artifacts
 *.raw
+*.bmap
+*.gz
 *.iso
 *.changes
 *.packages

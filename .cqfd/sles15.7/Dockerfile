@@ -17,14 +17,19 @@ RUN zypper --gpg-auto-import-keys refresh && zypper install -y --no-recommends \
     binutils \
     gptfdisk \
     jing \
+    jq \
     kiwi-systemdeps-iso-media \
     kpartx \
     lvm2 \
+    pigz \
+    python3-bmap-tools \
+    python3-setuptools \
     python311 \
     python311-kiwi \
     SLE_RT-release \
     sudo \
     systemd \
+    which \
     xz
 
 ADD kiwi.yml /etc/kiwi.yml

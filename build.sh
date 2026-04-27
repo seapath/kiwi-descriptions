@@ -113,6 +113,8 @@ fi
 # Build image
 sudo kiwi-ng system build $KIWI_BUILD_ARGS $KIWI_EXTRA_ARGS
 
+DISK_IMAGE_FILE="$(jq -re .disk_image.filename kiwi.result.json)"
+
 # Give ownership and permissions of build artifacts to current user
 sudo chown -R $USER \
     build \
@@ -123,3 +125,21 @@ sudo chown -R $USER \
     *.verified \
     kiwi.result*
 sudo chmod -R u+w build
+
+
+# Generate .bmap and .gz files to be used for flashing with bmaptool
+rm -f "$DISK_IMAGE_FILE.bmap" "$DISK_IMAGE_FILE.gz"
+if which bmaptool > /dev/null; then
+    log info "Generating .raw.bmap and .raw.gz files..."
+
+    bmaptool create -o "$DISK_IMAGE_FILE.bmap" "$DISK_IMAGE_FILE"
+
+    if which pigz > /dev/null; then
+        pigz -k "$DISK_IMAGE_FILE"
+    else
+        log info "Using gzip for compression. Consider installing pigz for faster compression."
+        gzip -k "$DISK_IMAGE_FILE"
+    fi
+else
+    log warn "bmaptool not found, skipping .raw.bmap and .raw.gz generation"
+fi
