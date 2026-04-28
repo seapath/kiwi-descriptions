@@ -79,17 +79,32 @@ if [ -n "$ADD_SLE_REPOS" ]; then
     # - Only use enabled repositories
     # - Get repositories names and URIs
     # - Filter SLE repositories and SUSE package hub
-    # - Extract URIs
-    SLES_REPOS_URIS="$(
+    SLE_REPOS="$(
         zypper lr -Eu |\
         cut -d'|' -f2,7 |\
-        grep -E "^\s*container-suseconnect" |\
-        cut -d'|' -f2
+        grep -E "^\s*container-suseconnect"
     )"
 
-    for i in $SLES_REPOS_URIS; do
-        KIWI_BUILD_ARGS="$KIWI_BUILD_ARGS --add-repo $i"
-    done
+    # Add repositories to kiwi-ng build
+    while read l; do
+        ALIAS="$(echo $l | cut -d'|' -f1)"
+        URI="$(echo $l | cut -d'|' -f2)"
+
+        # Priority order:
+        #   - SLE repositories
+        #   - SUSE Package Hub
+        #   - Other repositories
+        if echo "$l" | grep -q "container-suseconnect-zypp:SLE-"; then
+            log info "Adding SLE repository $ALIAS"
+            KIWI_BUILD_ARGS="$KIWI_BUILD_ARGS --add-repo $URI,,,10"
+        elif echo "$l" | grep -q "PackageHub"; then
+            log info "Adding PackageHub repository $ALIAS"
+            KIWI_BUILD_ARGS="$KIWI_BUILD_ARGS --add-repo $URI,,,50"
+        else
+            log info "Adding other repository $ALIAS"
+            KIWI_BUILD_ARGS="$KIWI_BUILD_ARGS --add-repo $URI,,,70"
+        fi
+    done <<< "$SLE_REPOS"
 fi
 
 # Add SSH keys to root overlay
