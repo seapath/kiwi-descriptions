@@ -55,7 +55,7 @@
         <package name="grub2-x86_64-efi"/>
         <package name="grub2"/>
         <package name="kernel-rt"/>
-        <package name="kernel-firmware"/>
+        <package name="kernel-firmware-all"/>
         <package name="shim"/>
 
         <!-- System base -->
@@ -116,7 +116,6 @@
         <package name="ovmf"/>
         <package name="qemu-block-curl"/>
         <package name="qemu-block-rbd"/>
-        <package name="qemu-kvm"/>
         <package name="qemu-tools"/>
         <package name="qemu-x86"/>
         <package name="virt-install"/>
