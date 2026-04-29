@@ -10,7 +10,9 @@ This repository contains image descriptions, also called appliances, to build SE
 https://osinside.github.io/kiwi/[KIWI NG].
 
 Currently, this repository provides image descriptions for the following SEAPATH flavors:
-* SEAPATH SLE 15 SP7
+
+* SEAPATH SLE RT 15 SP7 (standalone hypervisor only)
+* SEAPATH SLES 16.0
 
 
 == Prerequisites
@@ -69,9 +71,13 @@ In that case:
 NOTE: This documentation doesn't cover in detail the build process without CQFD.
 
 [#sle-registration]
-=== Activate SUSE Linux Enterprise Real Time registration (only for SEAPATH SLE)
+=== Activate SUSE Linux Enterprise registration (only for SEAPATH SLE)
 
-When building SEAPATH SLE images, you need to have an active SUSE Linux Enterprise Real Time registration on the build system.
+When building SEAPATH SLE images, you need to have on the build system:
+
+* For SEAPATH SLE RT 15 SP7, an active SUSE Linux Enterprise Real Time registration.
+* For SEAPATH SLES 16.0, an active SUSE Linux Enterprise registration.
+
 This is required to access the necessary repositories and packages for the build process.
 
 ==== When building with CQFD
@@ -79,16 +85,16 @@ This is required to access the necessary repositories and packages for the build
 When building with CQFD, you must first manually register to the SUSE Customer Center using an SLE
 registration code and retrieve the credentials generated in the `/etc/zypp/credentials.d/SCCcredentials`.
 
-This can be done using the official SLES docker image:
+This can be done using the official SUSE Base Container Image:
 
-  $ docker run --rm registry.suse.com/suse/sle15:latest bash -c " \
+  $ docker run --rm registry.suse.com/bci/bci-base:<version> bash -c " \
         zypper -n in SUSEConnect; \
         SUSEConnect --regcode <your-registration-code> -p SLES/<version>/x86_64; \
         cat /etc/zypp/credentials.d/SCCcredentials"
 
 For exemple, if building for SEAPATH SLE 15 SP7, you should run:
 
-  $ docker run --rm registry.suse.com/suse/sle15:latest bash -c " \
+  $ docker run --rm registry.suse.com/suse/bci-base:15.7 bash -c " \
         zypper -n in SUSEConnect; \
         SUSEConnect --regcode <your-registration-code> -p SLES/15.7/x86_64; \
         cat /etc/zypp/credentials.d/SCCcredentials"
@@ -113,9 +119,15 @@ documentation.
 ==== When building without CQFD
 
 When building without CQFD, you can directly register to the SUSE Customer Center on the build system
-using the `SUSEConnect` command-line tool:
+using the `SUSEConnect` command-line tool.
 
-  $ SUSEConnect --regcode <your-registration-code> -p SLE_RT/<version>/x86_64
+For SEAPATH SLE RT 15 SP7, run:
+
+  $ SUSEConnect --regcode <your-registration-code> -p SLE_RT/15.7/x86_64
+
+For SEAPATH SLES 16.0, run:
+
+  $ SUSEConnect --regcode <your-registration-code> -p SLES/16.0/x86_64
 
 For more information about SLE registration, please refer to the
 https://documentation.suse.com/fr-fr/sles/15-SP6/html/SLES-all/cha-register-sle.html[official SUSE documentation].
@@ -158,7 +170,8 @@ The following instructions suppose that you are building with CQFD.
 Identify the CQFD flavor corresponding to the SEAPATH image you want to build.
 For now the following flavors are available:
 
-* `sle-seapath-hypervisor`: SEAPATH SLE 15 SP7 hypervisors image.
+* `sle-seapath-hypervisor`: SEAPATH SLE 15 SP7 hypervisor image.
+* `sles16-seapath-hypervisor-standalone`: SEAPATH SLES 16.0 standalone hypervisor image.
 
 NOTE: When building a SLE based SEAPATH image, make sure to first configure your SLE registration.
 See the <<sle-registration>> section.
