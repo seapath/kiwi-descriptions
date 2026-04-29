@@ -35,7 +35,7 @@
                 <volume name="varlog"  mountpoint="/var/log" size="5G"/>
             </systemdisk>
 
-            <bootloader name="grub2" console="serial" timeout="10"/>
+            <bootloader name="grub2" console="console" timeout="10"/>
 
         </type>
     </preferences>
