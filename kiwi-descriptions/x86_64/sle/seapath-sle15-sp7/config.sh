@@ -8,6 +8,10 @@ test -f /.kconfig && . /.kconfig
 # Should be set to "uninitialized"
 echo "uninitialized" > /etc/machine-id
 
+
+# Additional python packages
+pip3 install podman-compose
+
 # Configure SSH
 
 chown admin:admin /home/admin/.ssh/authorized_keys
