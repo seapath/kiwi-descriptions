@@ -82,8 +82,8 @@ if [ -n "$ADD_SLE_REPOS" ]; then
     # - Extract URIs
     SLES_REPOS_URIS="$(
         zypper lr -Eu |\
-        cut -d'|' -f3,7 |\
-        grep -E "^\s*(SLE|SUSE-PackageHub)[^A-Za-z]" |\
+        cut -d'|' -f2,7 |\
+        grep -E "^\s*container-suseconnect" |\
         cut -d'|' -f2
     )"
 
