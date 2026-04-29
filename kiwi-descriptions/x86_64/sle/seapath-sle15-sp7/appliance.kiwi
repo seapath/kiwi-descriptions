@@ -129,10 +129,7 @@
         <package name="net-snmp"/>
 
         <!-- Python 3 -->
-        <package name="python3-cffi"/>
-        <package name="python3-pip"/>
-        <package name="python3-setuptools"/>
-        <package name="python3"/>
+        <package name="python311-base"/>
 
         <!-- Tools -->
         <package name="bzip2"/>

@@ -10,7 +10,11 @@ echo "uninitialized" > /etc/machine-id
 
 
 # Additional python packages
-pip3 install podman-compose
+python3.11 -m ensurepip
+python3.11 -m pip install \
+    cffi \
+    podman-compose \
+    setuptools
 
 # Configure SSH
 
