@@ -31,7 +31,7 @@
             </oemconfig>
 
             <systemdisk name="vg1">
-                <volume name="@root"    size="15G"/>
+                <volume name="@root=root" size="15G"/>
                 <volume name="varlog"  mountpoint="/var/log" size="5G"/>
             </systemdisk>
 
