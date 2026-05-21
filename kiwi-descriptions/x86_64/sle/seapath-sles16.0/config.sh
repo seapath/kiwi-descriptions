@@ -23,6 +23,10 @@ chmod 0600 /home/ansible/.ssh/authorized_keys
 
 baseService sshd on
 
+# Additional configurations
+
+mv /usr/share/vim/vim92/suse.vimrc /etc/vimrc
+
 # Network
 
 baseService systemd-networkd on
