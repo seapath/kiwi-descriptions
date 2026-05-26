@@ -206,4 +206,12 @@
         <package name="udev"/>
     </packages>
 
+    <packages type="image" profiles="cockpit">
+
+        <!-- Cockpit -->
+        <package name="cockpit"/>
+        <package name="cockpit-machines"/>
+        <package name="cockpit-packagekit"/>
+
+    </packages>
 </image>
