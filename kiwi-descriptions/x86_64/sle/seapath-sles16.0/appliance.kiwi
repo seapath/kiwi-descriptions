@@ -175,6 +175,21 @@
 
     </packages>
 
+    <packages type="image" profiles="cluster">
+
+        <!-- High Availability -->
+        <package name="ceph-common"/>
+        <package name="cephadm"/>
+        <package name="conntrackd"/>
+        <package name="corosync"/>
+        <package name="crmsh"/>
+        <package name="libcephfs2"/>
+        <package name="pacemaker"/>
+        <package name="python3-ceph-argparse"/>
+        <package name="python3-cephfs"/>
+
+    </packages>
+
     <packages type="bootstrap">
         <package name="ca-certificates-mozilla"/>
         <package name="ca-certificates"/>
