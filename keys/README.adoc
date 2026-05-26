@@ -1,0 +1,7 @@
+SEAPATH configure two main users: `admin` and `ansible`.
+These users only accept login via an SSH session using SSH keys.
+
+In this directory, put the SSH public keys you wish to use in the following files:
+
+* `admin_public_ssh_key.pub`: public keys used to login with the `admin` user.
+* `ansible_public_ssh_key.pub`: public keys used to login with the `ansible` user.
