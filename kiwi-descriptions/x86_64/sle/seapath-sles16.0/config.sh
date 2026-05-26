@@ -13,13 +13,15 @@ echo "uninitialized" > /etc/machine-id
 python3.13 -m pip install \
     podman-compose
 
-# Configure SSH
+# Configure user permissions
 
-chown admin:admin /home/admin/.ssh/authorized_keys
-chown ansible:ansible /home/ansible/.ssh/authorized_keys
+chown -R admin:admin /home/admin
+chown -R ansible:ansible /home/ansible
 
 chmod 0600 /home/admin/.ssh/authorized_keys
 chmod 0600 /home/ansible/.ssh/authorized_keys
+
+# Configure SSH
 
 baseService sshd on
 
