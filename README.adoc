@@ -94,7 +94,7 @@ This can be done using the official SUSE Base Container Image:
 
 For exemple, if building for SEAPATH SLE 15 SP7, you should run:
 
-  $ docker run --rm registry.suse.com/suse/bci-base:15.7 bash -c " \
+  $ docker run --rm registry.suse.com/bci/bci-base:15.7 bash -c " \
         zypper -n in SUSEConnect; \
         SUSEConnect --regcode <your-registration-code> -p SLES/15.7/x86_64; \
         cat /etc/zypp/credentials.d/SCCcredentials"
