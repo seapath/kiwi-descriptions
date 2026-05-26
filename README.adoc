@@ -103,7 +103,7 @@ Then copy the credentials to `.cqfd/sles<version>/SCCcredentials`. The credentia
 after the "Successfully registered system" and has the following format:
 
 ```
-username=<SCC-usernam>
+username=<SCC-username>
 password=<SCC-password>
 system_token=<token>
 ```
