@@ -89,6 +89,8 @@ done
 if [ -n "$ADD_SLE_REPOS" ]; then
     log info "Adding SLE repositories from the local system to the built appliance."
 
+    sudo --preserve-env=ADDITIONAL_MODULES zypper refresh
+
     # - Only use enabled repositories
     # - Get repositories names and URIs
     # - Filter SLE repositories and SUSE package hub
