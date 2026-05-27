@@ -83,39 +83,32 @@ This is required to access the necessary repositories and packages for the build
 ==== When building with CQFD
 
 When building with CQFD, you must first manually register to the SUSE Customer Center using an SLE
-registration code and retrieve the credentials generated in the `/etc/zypp/credentials.d/` directory.
+registration code. The following command registers the system and copies the credentials directly
+to the `.cqfd/sles<version>/` directory.
 
 This can be done using the official SUSE Base Container Image:
 
-  $ docker run --rm registry.suse.com/bci/bci-base:<version> bash -c " \
+  $ docker run --rm \
+        -v $(pwd)/.cqfd/sles<version>:/output \
+        registry.suse.com/bci/bci-base:<version> bash -c " \
         zypper -n in SUSEConnect; \
         SUSEConnect --regcode <your-registration-code> -p SLES/<version>/x86_64; \
         SUSEConnect --regcode <your-additional-registration-code> -p sle-ha/<version>/x86_64; \
-        cat /etc/zypp/credentials.d/SCCcredentials; \
-        cat /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64"
+        cp /etc/zypp/credentials.d/SCCcredentials /output/SCCcredentials; \
+        cp /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64 /output/SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64; \
+        chmod 644 /output/SCCcredentials /output/SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64"
 
 For exemple, if building for SEAPATH SLES 16.0, you should run:
 
-  $ docker run --rm registry.suse.com/bci/bci-base:16.0 bash -c " \
+  $ docker run --rm \
+        -v $(pwd)/.cqfd/sles16.0:/output \
+        registry.suse.com/bci/bci-base:16.0 bash -c " \
         zypper -n in SUSEConnect; \
         SUSEConnect --regcode <your-registration-code> -p SLES/16.0/x86_64; \
         SUSEConnect --regcode <your-additional-registration-code> -p sle-ha/16.0/x86_64; \
-        cat /etc/zypp/credentials.d/SCCcredentials; \
-        cat /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64"
-
-Then copy the credentials to the corresponding `.cqfd/sles<version>/` directory, using the exact
-filenames referenced in the Dockerfile:
-
-* `SCCcredentials`
-* `SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64`
-
-The credentials are printed after the "Successfully registered system" and have the following format:
-
-```
-username=<SCC-username>
-password=<SCC-password>
-system_token=<token>
-```
+        cp /etc/zypp/credentials.d/SCCcredentials /output/SCCcredentials; \
+        cp /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64 /output/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64; \
+        chmod 644 /output/SCCcredentials /output/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64"
 
 Once the credential files are generated and placed in the correct `.cqfd/sles<version>/` directory,
 CQFD will automatically use them to connect to the SUSE Customer Center during
