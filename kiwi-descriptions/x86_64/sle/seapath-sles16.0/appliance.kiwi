@@ -132,6 +132,7 @@
 
         <!-- Python 3 -->
         <package name="python313-cffi"/>
+        <package name="python313-lxml"/>
         <package name="python313-pip"/>
         <package name="python313-setuptools"/>
         <package name="python313"/>
@@ -146,8 +147,11 @@
         <package name="lsb-release"/>
         <package name="ntfs-3g"/>
         <package name="perf"/>
+        <package name="rsync"/>
         <package name="rt-tests"/>
         <package name="sensors"/>
+        <package name="tuned-profiles-nfv"/>
+        <package name="tuned-profiles-realtime"/>
         <package name="tuned"/>
         <package name="vim"/>
         <package name="wget"/>
