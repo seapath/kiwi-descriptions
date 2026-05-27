@@ -5,6 +5,7 @@ keys/*
 
 # SLES credentials
 SCCcredentials
+SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64
 
 # Build artifacts
 *.raw
