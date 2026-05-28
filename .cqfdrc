@@ -1,7 +1,7 @@
 [project]
 org='seapath'
 name='seapath-kiwi'
-flavors='sle-seapath-hypervisor sles16-seapath-hypervisor-standalone sles16-seapath-hypervisor-standalone-cockpit sles16-seapath-hypervisor-cluster sles16-seapath-hypervisor-cluster-cockpit'
+flavors='sle-seapath-hypervisor sles16-seapath-observer sles16-seapath-hypervisor-standalone sles16-seapath-hypervisor-standalone-cockpit sles16-seapath-hypervisor-cluster sles16-seapath-hypervisor-cluster-cockpit'
 
 [build]
 distro='sles16.0'
@@ -10,6 +10,10 @@ command='sudo kiwi-ng --help'
 [sle-seapath-hypervisor]
 distro='sles15.7'
 command='./build.sh -s kiwi-descriptions/x86_64/sle/seapath-sle15-sp7'
+
+[sles16-seapath-observer]
+distro='sles16.0'
+command='./build.sh -p observer -s kiwi-descriptions/x86_64/sle/seapath-sles16.0'
 
 [sles16-seapath-hypervisor-standalone]
 distro='sles16.0'
