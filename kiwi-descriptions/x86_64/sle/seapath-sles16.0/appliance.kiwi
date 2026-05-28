@@ -146,9 +146,11 @@
         <package name="libxml2-tools"/>
         <package name="lsb-release"/>
         <package name="ntfs-3g"/>
+        <package name="openscap-utils"/>
         <package name="perf"/>
         <package name="rsync"/>
         <package name="rt-tests"/>
+        <package name="scap-security-guide"/>
         <package name="sensors"/>
         <package name="tuned-profiles-nfv"/>
         <package name="tuned-profiles-realtime"/>
