@@ -132,6 +132,7 @@
 
         <!-- Python 3 -->
         <package name="python313-cffi"/>
+        <package name="python313-libvirt-python"/>
         <package name="python313-lxml"/>
         <package name="python313-pip"/>
         <package name="python313-setuptools"/>
