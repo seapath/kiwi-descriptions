@@ -184,7 +184,18 @@
 
     </packages>
 
+    <containers source="quay.io" backend="podman" profiles="cluster">
+        <container name="ceph/ceph" tag="v20.2.0"/>
+    </containers>
+
+    <containers source="docker.io" backend="podman" profiles="cluster">
+        <container name="library/registry" tag="2"/>
+    </containers>
+
     <packages type="image" profiles="cluster">
+
+        <!-- Container tools (required container fetch step) -->
+        <package name="skopeo"/>
 
         <!-- High Availability -->
         <package name="ceph-common"/>
