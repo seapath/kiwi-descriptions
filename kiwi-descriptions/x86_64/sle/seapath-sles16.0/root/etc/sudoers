@@ -1,7 +1,3 @@
 admin   ALL=NOPASSWD: ALL
 
-Defaults:ansible !requiretty
-ansible    ALL=NOPASSWD:EXEC:SETENV: /bin/sh
-ansible    ALL=NOPASSWD: /usr/bin/rsync
-
 @includedir /etc/sudoers.d
