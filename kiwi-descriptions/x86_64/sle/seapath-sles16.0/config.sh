@@ -13,6 +13,10 @@ echo "uninitialized" > /etc/machine-id
 python3.13 -m pip install \
     podman-compose
 
+# Configure pam
+
+install -m 0440 /usr/lib/pam.d/login /etc/pam.d/login
+
 # Configure user permissions
 
 chown -R admin:admin /home/admin
