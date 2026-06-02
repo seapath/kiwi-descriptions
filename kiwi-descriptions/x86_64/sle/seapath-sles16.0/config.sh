@@ -38,3 +38,4 @@ mv /usr/share/vim/vim92/suse.vimrc /etc/vimrc
 baseService systemd-networkd on
 baseService systemd-networkd-wait-online off
 baseService systemd-resolved on
+baseService openvswitch on
