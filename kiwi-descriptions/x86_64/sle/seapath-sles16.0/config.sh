@@ -1,8 +1,9 @@
 #!/bin/bash
 set -ex
 
-# Kiwi utility functions
+# Kiwi utility functions & variables
 test -f /.kconfig && . /.kconfig
+test -f /.profile && . /.profile
 
 # An empty machine-id doesn't mean first boot for systemd
 # Should be set to "uninitialized"
@@ -39,3 +40,9 @@ baseService systemd-networkd on
 baseService systemd-networkd-wait-online off
 baseService systemd-resolved on
 baseService openvswitch on
+
+# logrotate
+
+if echo "${kiwi_profiles}" | grep -qw "cluster"; then
+    rm -f /etc/logrotate.d/cephadm
+fi
