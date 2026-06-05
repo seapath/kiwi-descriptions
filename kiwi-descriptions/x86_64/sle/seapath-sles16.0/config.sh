@@ -26,6 +26,9 @@ chown -R ansible:ansible /home/ansible
 chmod 0600 /home/admin/.ssh/authorized_keys
 chmod 0600 /home/ansible/.ssh/authorized_keys
 
+chmod 0440 /etc/sudoers
+chmod 0440 /etc/sudoers.d/ansible
+
 # Configure SSH
 
 baseService sshd on
