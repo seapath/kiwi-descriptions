@@ -132,7 +132,6 @@
 
         <!-- Python 3 -->
         <package name="python313-cffi"/>
-        <package name="python313-libvirt-python"/>
         <package name="python313-lxml"/>
         <package name="python313-pip"/>
         <package name="python313-setuptools"/>
@@ -159,11 +158,7 @@
         <package name="vim"/>
         <package name="wget"/>
 
-    </packages>
-
-    <packages type="image" profiles="hypervisor">
-
-        <!-- Virtualization -->
+        <!-- libvirt -->
         <package name="libvirt-client"/>
         <package name="libvirt-client-qemu"/>
         <package name="libvirt-daemon"/>
@@ -175,6 +170,13 @@
         <package name="libvirt-daemon-driver-qemu"/>
         <package name="libvirt-daemon-driver-secret"/>
         <package name="libvirt-daemon-driver-storage"/>
+        <package name="python313-libvirt-python"/>
+
+    </packages>
+
+    <packages type="image" profiles="hypervisor">
+
+        <!-- Virtualization -->
         <package name="ovmf"/>
         <package name="qemu-block-curl=10.0.8"/>
         <package name="qemu-block-rbd=10.0.8"/>
