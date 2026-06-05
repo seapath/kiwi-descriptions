@@ -18,6 +18,14 @@ python3.13 -m pip install \
 
 install -m 0440 /usr/lib/pam.d/login /etc/pam.d/login
 
+for i in /etc/pam.d/common-* /etc/pam.d/postlogin-*; do
+    # Disable pam-config managed files if found
+    if [ -L "$i" ] && [ "$(readlink $i)" = "${i}-pc" ]; then
+        rm $i
+        sed '/^#.*/d' ${i}-pc > $i;
+    fi
+done
+
 # Configure user permissions
 
 chown -R admin:admin /home/admin
