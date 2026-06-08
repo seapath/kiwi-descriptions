@@ -211021,6 +211021,7 @@ virbr0-nic      tun       unmanaged     --
           <oval-def:criteria operator="OR">
             <oval-def:criterion comment="kernel is installed" test_ref="oval:ssg-inventory_test_kernel_installed:tst:1"/>
             <oval-def:criterion comment="kernel-default-base is installed" test_ref="oval:ssg-inventory_test_kernel_default_base_installed:tst:1"/>
+            <oval-def:criterion comment="kernel-rt is installed" test_ref="oval:ssg-inventory_test_kernel_rt_installed:tst:1"/>
           </oval-def:criteria>
         </oval-def:definition>
         <oval-def:definition id="oval:ssg-installed_OS_is_sle16:def:1" version="1" class="inventory">
@@ -211625,6 +211626,9 @@ virbr0-nic      tun       unmanaged     --
         <linux:rpminfo_test id="oval:ssg-inventory_test_kernel_default_base_installed:tst:1" version="1" check="all" comment="package kernel-default-base is installed" check_existence="all_exist" state_operator="AND">
           <linux:object object_ref="oval:ssg-obj_inventory_test_kernel_default_base_installed:obj:1"/>
         </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-inventory_test_kernel_rt_installed:tst:1" version="1" check="all" comment="package kernel-rt is installed" check_existence="all_exist" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_inventory_test_kernel_rt_installed:obj:1"/>
+        </linux:rpminfo_test>
         <ind:family_test id="oval:ssg-test_sle16_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
           <ind:object object_ref="oval:ssg-obj_sle16_unix_family:obj:1"/>
           <ind:state state_ref="oval:ssg-state_sle16_unix_family:ste:1"/>
@@ -211903,6 +211907,9 @@ virbr0-nic      tun       unmanaged     --
         </linux:rpminfo_object>
         <linux:rpminfo_object id="oval:ssg-obj_inventory_test_kernel_default_base_installed:obj:1" version="1">
           <linux:name>kernel-default-base</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_inventory_test_kernel_rt_installed:obj:1" version="1">
+          <linux:name>kernel-rt</linux:name>
         </linux:rpminfo_object>
         <ind:family_object id="oval:ssg-obj_sle16_unix_family:obj:1" version="1"/>
         <linux:rpminfo_object id="oval:ssg-obj_sle16_server:obj:1" version="1">
