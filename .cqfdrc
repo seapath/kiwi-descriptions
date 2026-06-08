@@ -1,11 +1,23 @@
 [project]
 org='seapath'
 name='seapath-kiwi'
-flavors='sle-seapath-hypervisor sles16-seapath-observer sles16-seapath-hypervisor-standalone sles16-seapath-hypervisor-standalone-cockpit sles16-seapath-hypervisor-cluster sles16-seapath-hypervisor-cluster-cockpit'
+flavors='clean sle-seapath-hypervisor sles16-seapath-observer sles16-seapath-hypervisor-standalone sles16-seapath-hypervisor-standalone-cockpit sles16-seapath-hypervisor-cluster sles16-seapath-hypervisor-cluster-cockpit'
 
 [build]
 distro='sles16.0'
 command='sudo kiwi-ng --help'
+
+[clean]
+distro='sles16.0'
+command='sudo rm -rf \
+    build \
+    *.changes \
+    *.install.iso \
+    *.packages \
+    *.raw \
+    *.verified \
+    kiwi.result*
+'
 
 [sle-seapath-hypervisor]
 distro='sles15.7'
