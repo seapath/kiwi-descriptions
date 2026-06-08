@@ -1,7 +1,15 @@
 [project]
 org='seapath'
 name='seapath-kiwi'
-flavors='clean sle-seapath-hypervisor sles16-seapath-observer sles16-seapath-hypervisor-standalone sles16-seapath-hypervisor-standalone-cockpit sles16-seapath-hypervisor-cluster sles16-seapath-hypervisor-cluster-cockpit'
+flavors='
+    clean
+    sle-seapath-hypervisor
+    sles16-seapath-observer
+    sles16-seapath-hypervisor-standalone
+    sles16-seapath-hypervisor-standalone-cockpit
+    sles16-seapath-hypervisor-cluster
+    sles16-seapath-hypervisor-cluster-cockpit
+'
 
 [build]
 distro='sles16.0'
