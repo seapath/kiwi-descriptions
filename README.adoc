@@ -11,8 +11,8 @@ https://osinside.github.io/kiwi/[KIWI NG].
 
 Currently, this repository provides image descriptions for the following SEAPATH flavors:
 
-* SEAPATH SLE RT 15 SP7 (standalone hypervisor only)
 * SEAPATH SLES 16.0
+* SEAPATH SLE RT 15 SP7 (standalone hypervisor only) (UNSUPPORTED)
 
 
 == Prerequisites
@@ -77,6 +77,7 @@ When building SEAPATH SLE images, you need to have on the build system:
 
 * For SEAPATH SLE RT 15 SP7, an active SUSE Linux Enterprise Real Time registration.
 * For SEAPATH SLES 16.0, an active SUSE Linux Enterprise registration.
+* In addition for SEAPATH SLES 16.0 cluster images, an active SUSE Linux Enterprise Server High Availability Extension registration.
 
 This is required to access the necessary repositories and packages for the build process.
 
@@ -173,8 +174,15 @@ The following instructions suppose that you are building with CQFD.
 Identify the CQFD flavor corresponding to the SEAPATH image you want to build.
 For now the following flavors are available:
 
-* `sle15-sp7-seapath-hypervisor`: SEAPATH SLE 15 SP7 hypervisor image.
-* `sles16-seapath-hypervisor-standalone`: SEAPATH SLES 16.0 standalone hypervisor image.
+* SEAPATH SLES 16.0
+** `sles16-seapath-hypervisor-standalone`: SEAPATH SLES 16.0 standalone hypervisor image.
+** `sles16-seapath-hypervisor-standalone-cockpit`: SEAPATH SLES 16.0 standalone hypervisor image with Cockpit.
+** `sles16-seapath-hypervisor-cluster`: SEAPATH SLES 16.0 cluster hypervisor image.
+** `sles16-seapath-hypervisor-cluster-cockpit`: SEAPATH SLES 16.0 cluster hypervisor image with Cockpit.
+** `sles16-seapath-observer`: SEAPATH SLES 16.0 observer image for use in a SEAPATH cluster.
+* SEAPATH SLE RT 15 SP7
+** `sle15-sp7-seapath-hypervisor`: SEAPATH SLE 15 SP7 standalone hypervisor image (UNSUPPORTED).
+** Development was dropped in favor of the SLES 16.0 images. It may be removed in a future version.
 
 NOTE: When building a SLE based SEAPATH image, make sure to first configure your SLE registration.
 See the <<sle-registration>> section.
@@ -185,17 +193,17 @@ See the <<sle-registration>> section.
 
   $ cqfd -b <cqfd-flavor> init
 
-For exemple, when building the SEAPATH SLE 15 SP7 hypervisors image;
+For exemple, when building the SEAPATH SLES 16.0 standalone hypervisors image;
 
-  $ cqfd -b sle15-sp7-seapath-hypervisor init
+  $ cqfd -b sles16-seapath-hypervisor-standalone init
 
 * Build the image.
 
   $ cqfd -b <cqfd-flavor>
 
-For exemple, when building the SEAPATH SLE 15 SP7 hypervisors image;
+For exemple, when building the SEAPATH SLES 16.0 standalone hypervisors image;
 
-  $ cqfd -b sle15-sp7-seapath-hypervisor
+  $ cqfd -b sles16-seapath-hypervisor-standalone
 
 
 === Installing the image
