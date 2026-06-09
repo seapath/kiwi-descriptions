@@ -52,6 +52,16 @@ baseService systemd-networkd-wait-online off
 baseService systemd-resolved on
 baseService openvswitch on
 
+# Disable modular libvirt daemons, SEAPATH uses the monolithic libvirtd daemon
+
+baseService virtnetworkd off
+baseService virtnodedevd off
+baseService virtnwfilterd off
+baseService virtproxyd off
+baseService virtqemud off
+baseService virtsecretd off
+baseService virtstoraged off
+
 # logrotate
 
 if echo "${kiwi_profiles}" | grep -qw "cluster"; then
