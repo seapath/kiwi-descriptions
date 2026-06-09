@@ -50,7 +50,15 @@ mv /usr/share/vim/vim92/suse.vimrc /etc/vimrc
 baseService systemd-networkd on
 baseService systemd-networkd-wait-online off
 baseService systemd-resolved on
+
+# Open vSwitch
+
 baseService openvswitch on
+
+cat >> /etc/sysconfig/openvswitch <<EOF
+# Disable running openvswitch with the openvswitch user/group
+OVS_USER_ID="root:root"
+EOF
 
 # Disable modular libvirt daemons, SEAPATH uses the monolithic libvirtd daemon
 
