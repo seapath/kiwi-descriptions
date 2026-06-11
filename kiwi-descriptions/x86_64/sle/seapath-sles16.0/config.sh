@@ -75,3 +75,13 @@ baseService virtstoraged off
 if echo "${kiwi_profiles}" | grep -qw "cluster"; then
     rm -f /etc/logrotate.d/cephadm
 fi
+
+# SUSE repository sync
+
+if echo "${kiwi_profiles}" | grep -qw "cockpit"; then
+    mkdir /etc/systemd/system/appstream-sync-cache.service.d
+    cat > /etc/systemd/system/appstream-sync-cache.service.d/start-when-registered.conf <<EOF
+[Unit]
+ConditionDirectoryNotEmpty=/etc/zypp/credentials.d
+EOF
+fi
