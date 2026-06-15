@@ -1,3 +1,6 @@
+# Copyright (C) 2026 Savoir-faire Linux, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
 FROM registry.suse.com/bci/bci-base:16.0
 
 ENV LANG=en_US.UTF-8 \
