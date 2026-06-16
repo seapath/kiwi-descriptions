@@ -3,7 +3,6 @@ org='seapath'
 name='seapath-kiwi'
 flavors='
     clean
-    sle15-sp7-seapath-hypervisor
     sles16-seapath-observer
     sles16-seapath-hypervisor-standalone
     sles16-seapath-hypervisor-standalone-cockpit
@@ -26,10 +25,6 @@ command='sudo rm -rf \
     *.verified \
     kiwi.result*
 '
-
-[sle15-sp7-seapath-hypervisor]
-distro='sles15.7'
-command='./build.sh -s kiwi-descriptions/x86_64/sle/seapath-sle15-sp7'
 
 [sles16-seapath-observer]
 distro='sles16.0'

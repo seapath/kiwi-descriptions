@@ -12,7 +12,6 @@ https://osinside.github.io/kiwi/[KIWI NG].
 Currently, this repository provides image descriptions for the following SEAPATH flavors:
 
 * SEAPATH SLES 16.0
-* SEAPATH SLE RT 15 SP7 (standalone hypervisor only) (UNSUPPORTED)
 
 
 == Prerequisites
@@ -73,9 +72,8 @@ NOTE: This documentation doesn't cover in detail the build process without CQFD.
 [#sle-registration]
 === Activate SUSE Linux Enterprise registration (only for SEAPATH SLE)
 
-When building SEAPATH SLE images, you need to have on the build system:
+When building SEAPATH SLES images, you need to have on the build system:
 
-* For SEAPATH SLE RT 15 SP7, an active SUSE Linux Enterprise Real Time registration.
 * For SEAPATH SLES 16.0, an active SUSE Linux Enterprise registration.
 * In addition for SEAPATH SLES 16.0 cluster images, an active SUSE Linux Enterprise Server High Availability Extension registration.
 
@@ -123,10 +121,6 @@ documentation.
 
 When building without CQFD, you can directly register to the SUSE Customer Center on the build system
 using the `SUSEConnect` command-line tool.
-
-For SEAPATH SLE RT 15 SP7, run:
-
-  $ SUSEConnect --regcode <your-registration-code> -p SLE_RT/15.7/x86_64
 
 For SEAPATH SLES 16.0, run:
 
@@ -180,9 +174,6 @@ For now the following flavors are available:
 ** `sles16-seapath-hypervisor-cluster`: SEAPATH SLES 16.0 cluster hypervisor image.
 ** `sles16-seapath-hypervisor-cluster-cockpit`: SEAPATH SLES 16.0 cluster hypervisor image with Cockpit.
 ** `sles16-seapath-observer`: SEAPATH SLES 16.0 observer image for use in a SEAPATH cluster.
-* SEAPATH SLE RT 15 SP7
-** `sle15-sp7-seapath-hypervisor`: SEAPATH SLE 15 SP7 standalone hypervisor image (UNSUPPORTED).
-** Development was dropped in favor of the SLES 16.0 images. It may be removed in a future version.
 
 NOTE: When building a SLE based SEAPATH image, make sure to first configure your SLE registration.
 See the <<sle-registration>> section.
