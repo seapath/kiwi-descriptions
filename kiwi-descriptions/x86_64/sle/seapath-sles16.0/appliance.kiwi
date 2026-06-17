@@ -190,7 +190,7 @@
     </packages>
 
     <containers source="quay.io" backend="podman" profiles="cluster">
-        <container name="ceph/ceph" tag="v20.2.0"/>
+        <container name="ceph/ceph" tag="v18.2.7"/>
     </containers>
 
     <containers source="docker.io" backend="podman" profiles="cluster">
