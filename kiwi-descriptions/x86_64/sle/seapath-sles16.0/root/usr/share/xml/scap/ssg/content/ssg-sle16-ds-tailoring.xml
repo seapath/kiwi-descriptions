@@ -18,5 +18,6 @@ https://messervices.cyber.gouv.fr/guides/en-configuration-recommendations-gnulin
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_file_groupownership_system_commands_dirs" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_sysctl_kernel_pid_max" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_enable_iommu_force" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes" selected="false"/>
   </xccdf:Profile>
 </xccdf:Tailoring>
