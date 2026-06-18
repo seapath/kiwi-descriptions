@@ -180,11 +180,11 @@
 
         <!-- Virtualization -->
         <package name="ovmf"/>
-        <package name="qemu-block-curl=10.0.8"/>
-        <package name="qemu-block-rbd=10.0.8"/>
-        <package name="qemu-img=10.0.8"/>
-        <package name="qemu-tools=10.0.8"/>
-        <package name="qemu-x86=10.0.8"/>
+        <package name="qemu-block-curl"/>
+        <package name="qemu-block-rbd"/>
+        <package name="qemu-img"/>
+        <package name="qemu-tools"/>
+        <package name="qemu-x86"/>
         <package name="virt-install"/>
 
     </packages>
