@@ -78,9 +78,8 @@ jobs:
         run: |
           mkdir -p release-files
 
-          BUILD_ID="${{ needs.set-build-id.outputs.resolved_build_id }}"
           SRC_IMAGE_FILE_BASE="$(jq -re .disk_image.filename kiwi.result.json)"
-          DST_IMAGE_FILE_BASE="seapath-${BUILD_ID}-sles-${{ matrix.image_type }}.rootfs.raw"
+          DST_IMAGE_FILE_BASE="seapath-${{ needs.set-build-id.outputs.resolved_build_id }}-sles-${{ matrix.image_type }}.rootfs.raw"
 
           mv ${SRC_IMAGE_FILE_BASE}.bmap release-files/${DST_IMAGE_FILE_BASE}.bmap
           mv ${SRC_IMAGE_FILE_BASE}.gz release-files/${DST_IMAGE_FILE_BASE}.gz
@@ -100,8 +99,8 @@ jobs:
             --secret_key=${S3CMD_SECRET_KEY} \
             --host=${S3_HOST} \
             --host-bucket=${S3_HOST_BUCKET} \
-            sync release-files/ "${S3_BUCKET}/builds/${BUILD_ID}/"
+            sync release-files/ "${S3_BUCKET}/builds/${{ needs.set-build-id.outputs.resolved_build_id }}/"
 
-          echo "Version: ${BUILD_ID}"
+          echo "Version: ${{ needs.set-build-id.outputs.resolved_build_id }}"
           echo "Bucket: ${S3_BUCKET}"
           ls -lah "$UPLOAD_DIR/"
