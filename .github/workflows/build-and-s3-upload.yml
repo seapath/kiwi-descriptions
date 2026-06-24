@@ -48,7 +48,7 @@ jobs:
       - name: Set up dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ca-certificates curl jq wget
+          sudo apt-get install -y ca-certificates curl jq
 
       - name: Install CQFD
         run: |

@@ -34,7 +34,7 @@ jobs:
       - name: Set up dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ca-certificates curl wget
+          sudo apt-get install -y ca-certificates curl
 
       - name: Install CQFD
         run: |
@@ -47,6 +47,7 @@ jobs:
         with:
           image_type: ${{ matrix.image_type }}
           use_cockpit: ${{ matrix.cockpit == 'cockpit' }}
+          ssh_public_key: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILhk48cr2jsABDIO/CzmiVDidEof3KoXi/L9qniZKBBT seapath-dummy-key'
         env:
           SLES_USERNAME: ${{ secrets.SLES_USERNAME }}
           SLES_PASSWORD: ${{ secrets.SLES_PASSWORD }}
