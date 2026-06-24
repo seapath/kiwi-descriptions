@@ -4,7 +4,6 @@ inputs:
   image_type:
     description: 'Image type, should be standalone, cluster or observer'
     required: true
-    default: 'standalone'
   use_cockpit:
     description: 'Whether to include cockpit in the image'
     required: false
