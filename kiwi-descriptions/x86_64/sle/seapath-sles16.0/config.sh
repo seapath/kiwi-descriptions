@@ -34,8 +34,16 @@ done
 chown -R admin:admin /home/admin
 chown -R ansible:ansible /home/ansible
 
-chmod 0600 /home/admin/.ssh/authorized_keys
-chmod 0600 /home/ansible/.ssh/authorized_keys
+if [ -f /home/admin/.ssh/authorized_keys ]; then
+    chmod 0600 /home/admin/.ssh/authorized_keys
+else
+    mkdir -p /home/admin/.ssh
+fi
+if [ -f /home/ansible/.ssh/authorized_keys ]; then
+    chmod 0600 /home/ansible/.ssh/authorized_keys
+else
+    mkdir -p /home/ansible/.ssh
+fi
 
 chmod 0440 /etc/sudoers
 chmod 0440 /etc/sudoers.d/ansible

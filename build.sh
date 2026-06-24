@@ -130,16 +130,16 @@ if [ -f keys/admin_public_ssh_key.pub ]; then
     mkdir -p $KIWI_DESCRIPTION/root/home/admin/.ssh
     cp keys/admin_public_ssh_key.pub $KIWI_DESCRIPTION/root/home/admin/.ssh/authorized_keys
 else
-    log error "keys/admin_public_ssh_key.pub doesn't exist!"
-    exit 1
+    log info "No SSH public key set for admin user"
+    rm -rf $KIWI_DESCRIPTION/root/home/admin/.ssh/authorized_keys
 fi
 
 if [ -f keys/ansible_public_ssh_key.pub ]; then
     mkdir -p $KIWI_DESCRIPTION/root/home/ansible/.ssh
     cp keys/ansible_public_ssh_key.pub $KIWI_DESCRIPTION/root/home/ansible/.ssh/authorized_keys
 else
-    log error "keys/ansible_public_ssh_key.pub doesn't exist!"
-    exit 1
+    log info "No SSH public key set for ansible user"
+    rm -rf $KIWI_DESCRIPTION/root/home/ansible/.ssh/authorized_keys
 fi
 
 # Build image
