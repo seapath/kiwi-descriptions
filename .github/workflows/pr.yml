@@ -18,6 +18,10 @@ on:
     types: [opened, reopened, synchronize]
     branches: [main]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   # It can look crazy but the workflow_run trigger does not expose data about
   # the PR of the initial workflow _for forked repositories_.

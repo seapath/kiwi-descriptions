@@ -14,6 +14,10 @@ on:
           Build identifier for organizing artifacts in S3.
           If not provided, defaults to current timestamp (YYYY-MM-DD/HH-MM-SS).
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
 
   set-build-id:
