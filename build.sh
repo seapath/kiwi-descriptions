@@ -25,6 +25,7 @@ ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:,
 eval set -- "$ARGS"
 
 GH_MASK_URLS=false
+IMAGE_IS_HYPERVISOR=false
 
 while true; do
     case "$1" in
@@ -39,8 +40,13 @@ Options:
   -e, --extra-build-args    Extra build arguments to pass to the 'kiwi-ng system build' command.
   -o, --global-opts         Global options to pass to the 'kiwi-ng' command.
   -p, --profile             Image profile to use. Can be specified multiple times for multiple profiles.
-                            Valid profiles:
-                                - hypervisor: Image with packages for hypervisor (e.g., KVM, containers).
+                            Default available SEAPATH profiles:
+                                - hypervisor: Image with packages for hypervisor (ex: KVM, containers).
+                                - cluster: Image with packages for cluster (ex: corosync, pacemaker, ceph).
+                                - observer: Image with packages for cluster observer.
+                                            Implies "cluster" profile.
+                                            Mutually exclusive with "hypervisor" profile.
+                                - cockpit: Image with packages for cockpit web interface.
       --gh-mask-urls        Mask repositories URLs in Github Action logs.
   -h                        Show this help message and exit.
 EOF
@@ -63,6 +69,22 @@ EOF
         shift 2
         ;;
     -p|--profile)
+        case "$2" in
+            hypervisor)
+                IMAGE_IS_HYPERVISOR=true
+                ;;
+            cluster)
+                ;;
+            observer)
+                if $IMAGE_IS_HYPERVISOR; then
+                    log error "The 'observer' profile is mutually exclusive with the 'hypervisor' profile."
+                    exit 1
+                fi
+                ;;
+            *)
+                ;;
+        esac
+
         KIWI_BUILD_PROFILES="$KIWI_BUILD_PROFILES $2"
         shift 2
         ;;
