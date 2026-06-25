@@ -34,7 +34,7 @@ jobs:
         run: |
           cat <<EOF > ${{ env.PR_METADATA_FILE }}
           {
-            "pr_sha": "${{ github.sha }}",
+            "pr_sha": "${{ github.sha }}"
           }
           EOF
 
