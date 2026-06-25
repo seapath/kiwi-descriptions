@@ -66,7 +66,7 @@ jobs:
           details_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           output: |
             {
-              "summary": "Building SEAPATH SLES 16.0 ${{ matrix.image_type }} / ${{ matrix.cockpit }} image",
+              "summary": "Building SEAPATH SLES 16.0 ${{ matrix.image_type }} / ${{ matrix.cockpit }} image"
             }
 
       - name: Checkout repository
