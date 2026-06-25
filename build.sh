@@ -148,13 +148,13 @@ sudo kiwi-ng $KIWI_GLOBAL_ARGS system build $KIWI_BUILD_ARGS $KIWI_EXTRA_ARGS
 DISK_IMAGE_FILE="$(jq -re .disk_image.filename kiwi.result.json)"
 
 # Give ownership and permissions of build artifacts to current user
-BUILD_FILES="$(find . -type f \( \
+BUILD_FILES="$(find . -path ./build -prune -o -type f \( \
         -name '*.changes' -o \
         -name '*.install.iso' -o \
         -name '*.packages' -o \
         -name '*.raw' -o \
         -name '*.verified' -o \
-        -name 'kiwi.result*' \))"
+        -name 'kiwi.result*' \) -print)"
 
 sudo chown -R $USER build $BUILD_FILES 
 sudo chmod -R u+w build
