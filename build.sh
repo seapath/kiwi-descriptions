@@ -5,6 +5,7 @@
 set -e
 
 SCRIPT_NAME=$(basename "$0")
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 
 log() {
     local level="$1"; shift
@@ -25,6 +26,7 @@ ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:,
 eval set -- "$ARGS"
 
 GH_MASK_URLS=false
+IMAGE_ROLE="standalone"     # Possible values: standalone, cluster, observer
 IMAGE_IS_HYPERVISOR=false
 
 while true; do
@@ -74,12 +76,16 @@ EOF
                 IMAGE_IS_HYPERVISOR=true
                 ;;
             cluster)
+                if [ "$IMAGE_ROLE" != "observer" ]; then
+                    IMAGE_ROLE="cluster"
+                fi
                 ;;
             observer)
                 if $IMAGE_IS_HYPERVISOR; then
                     log error "The 'observer' profile is mutually exclusive with the 'hypervisor' profile."
                     exit 1
                 fi
+                IMAGE_ROLE="observer"
                 ;;
             *)
                 ;;
@@ -204,6 +210,11 @@ if which bmaptool > /dev/null; then
     log info "Generating .raw.bmap and .raw.gz files..."
 
     bmaptool create -o "$DISK_IMAGE_FILE.bmap" "$DISK_IMAGE_FILE"
+
+    VERSION="$(git -C "$SCRIPT_DIR" describe --tags --dirty 2>/dev/null || echo "unknown")"
+
+    ROLE=$IMAGE_ROLE BMAP_FILE="$DISK_IMAGE_FILE.bmap" SEAPATH_VERSION=$VERSION \
+        python3 "$SCRIPT_DIR/generate_seapath_metadata.py"
 
     if which pigz > /dev/null; then
         pigz -k "$DISK_IMAGE_FILE"
