@@ -1,0 +1,46 @@
+# Copyright (C) 2026 Savoir-faire Linux, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+name: Pull Requests
+
+on:
+  # With the"pull_request" trigger, workflows triggered by PRs made from forks
+  # are executed in a "safe" context without access to secrets.
+  # Since we need the secret necessary to access SLES repositories during build,
+  # ci-build-sles16.0 is triggered via the workflow_run event when this pr workflow runs.
+  # This allow ci-build-sles16.0 to get the necessary secret permissions.
+  # Thus, this "Pull Requests" workflow does nothing except uploading some
+  # metadata used by ci-build-sles16.0 to checkout the PR.
+  # N.B. we cannot use the pull_request_target trigger since it does not wait
+  # for approval of reviewers, which is a big security issue.
+
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+
+jobs:
+  # It can look crazy but the workflow_run trigger does not expose data about
+  # the PR of the initial workflow _for forked repositories_.
+  # (https://github.com/orgs/community/discussions/25220)
+  # Thus, we do this ugly thing of putting it in an artifact to consume it
+  # in the next workflow.
+  export-pr-metadata:
+    name: "Export PR metadata"
+    env:
+      PR_METADATA_FILE: pr_metadata.json
+    runs-on: ["ubuntu-slim"]
+    steps:
+      - name: Create metadata file
+        run: |
+          cat <<EOF > ${{ env.PR_METADATA_FILE }}
+          {
+            "pr_sha": "${{ github.sha }}",
+          }
+          EOF
+
+      - name: Upload metadata artifact
+        uses: actions/upload-artifact@v7
+        with:
+          archive: false
+          path: "${{ env.PR_METADATA_FILE }}"
+          retention-days: 1

@@ -4,9 +4,11 @@
 name: SEAPATH SLES 16.0 CI Build
 
 on:
-  pull_request:
-    types: [opened, reopened, synchronize]
-    branches: [main]
+  workflow_run:
+    workflows:
+      - Pull Requests
+    types:
+      - completed
   workflow_dispatch:
   workflow_call:
 
@@ -27,9 +29,50 @@ jobs:
           - image_type: observer
             cockpit: cockpit
 
+    permissions:
+      checks: write
+      actions: read
+    env:
+      PR_METADATA_FILE: pr_metadata.json
+
     steps:
+      - name: Download PR metadata
+        uses: actions/download-artifact@v8
+        if: ${{ github.event_name == 'workflow_run' }}
+        with:
+          name: "${{ env.PR_METADATA_FILE }}"
+          run-id: "${{ github.event.workflow_run.id }}"
+          # Since we are downloading an artifact from another run, we have to
+          # specify the github-token parameter.
+          github-token: ${{ github.token }}
+
+      - name: Process PR metadata
+        if: ${{ github.event_name == 'workflow_run' }}
+        id: pr-metadata
+        run: |
+          echo "sha=$(cat "${{ env.PR_METADATA_FILE }}" | jq -r '.pr_sha')" >> "$GITHUB_OUTPUT"
+
+      # We create a check so the PR does not appear as "CI passed" since we are
+      # actually waiting for the CI in this workflow.
+      - name: Create PR check
+        if: ${{ github.event_name == 'workflow_run' && always()}}
+        id: create-check
+        uses: LouisBrunner/checks-action@dfcbcf801bff1ea7f1414824fc28f2cd697b35da
+        with:
+          token: "${{ github.token }}"
+          name: "SEAPATH SLES 16.0 CI Build / build (${{ matrix.image_type }} / ${{ matrix.cockpit }})"
+          sha: "${{ steps.pr-metadata.outputs.sha }}"
+          status: "in_progress"
+          details_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          output: |
+            {
+              "summary": "Building SEAPATH SLES 16.0 ${{ matrix.image_type }} / ${{ matrix.cockpit }} image",
+            }
+
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          ref: ${{ case(github.event_name == 'workflow_run', steps.pr-metadata.outputs.sha, '') }}
 
       - name: Set up dependencies
         run: |
@@ -60,3 +103,12 @@ jobs:
           name: kiwi-logs-${{ matrix.image_type }}-${{ matrix.cockpit }}-${{ github.run_id }}
           path: build/image-root.log
           if-no-files-found: ignore
+
+      - name: Update PR check
+        if: ${{ github.event_name == 'workflow_run' && always() }}
+        uses: LouisBrunner/checks-action@dfcbcf801bff1ea7f1414824fc28f2cd697b35da
+        with:
+          token: "${{ github.token }}"
+          check_id: "${{ steps.create-check.outputs.check_id }}"
+          status: "completed"
+          conclusion: "${{ job.status }}"
