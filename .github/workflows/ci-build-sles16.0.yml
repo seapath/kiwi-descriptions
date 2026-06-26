@@ -54,7 +54,7 @@ jobs:
         if: ${{ github.event_name == 'workflow_run' }}
         id: pr-metadata
         run: |
-          SHA="sha=$(cat "${{ env.PR_METADATA_FILE }}" | jq -r '.pr_sha')"
+          SHA="$(cat "${{ env.PR_METADATA_FILE }}" | jq -r '.pr_sha')"
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
 
       # We create a check so the PR does not appear as "CI passed" since we are
