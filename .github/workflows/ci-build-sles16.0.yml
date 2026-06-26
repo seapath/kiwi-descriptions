@@ -101,8 +101,13 @@ jobs:
           SLES_PASSWORD: ${{ secrets.SLES_PASSWORD }}
           SLES_TOKEN: ${{ secrets.SLES_TOKEN }}
 
-      - name: Upload build logs
+      - name: Logs post-processing
         if: ${{ failure() }}
+        id: logs-post-process
+        run: sed -Ei 's|https://updates\.suse\.com[^ ]*|\*\*\*|g' build/image-root.log
+
+      - name: Upload build logs
+        if: ${{ failure() && steps.logs-post-process.conclusion == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: kiwi-logs-${{ matrix.image_type }}-${{ matrix.cockpit }}-${{ github.run_id }}
