@@ -22,6 +22,8 @@ command='sudo rm -rf \
     *.install.iso \
     *.packages \
     *.raw \
+    *.raw.bmap \
+    *.raw.gz \
     *.verified \
     kiwi.result*
 '
