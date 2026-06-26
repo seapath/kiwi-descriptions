@@ -62,5 +62,5 @@ runs:
       shell: bash
       run: |
         echo "::group::Build image"
-        cqfd -b "${{ steps.flavor.outputs.flavor }}"
+        cqfd -b "${{ steps.flavor.outputs.flavor }}" run -c --gh-mask-urls
         echo "::endgroup::"

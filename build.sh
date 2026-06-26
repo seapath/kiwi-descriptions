@@ -21,8 +21,10 @@ log() {
     echo "[$SCRIPT_NAME] [$uplevel] $*"
 }
 
-ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:" -n "build.sh" -- "$@")
+ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:,--gh-mask-urls" -n "build.sh" -- "$@")
 eval set -- "$ARGS"
+
+GH_MASK_URLS=false
 
 while true; do
     case "$1" in
@@ -39,6 +41,7 @@ Options:
   -p, --profile             Image profile to use. Can be specified multiple times for multiple profiles.
                             Valid profiles:
                                 - hypervisor: Image with packages for hypervisor (e.g., KVM, containers).
+      --gh-mask-urls        Mask repositories URLs in Github Action logs.
   -h                        Show this help message and exit.
 EOF
         exit 0
@@ -62,6 +65,10 @@ EOF
     -p|--profile)
         KIWI_BUILD_PROFILES="$KIWI_BUILD_PROFILES $2"
         shift 2
+        ;;
+    --gh-mask-urls)
+        GH_MASK_URLS=true
+        shift
         ;;
     --)
         shift
@@ -111,6 +118,10 @@ if [ -n "$ADD_SLE_REPOS" ]; then
         ALIAS="$(echo $l | cut -d'|' -f1)"
         URI="$(echo $l | cut -d'|' -f2)"
 
+        if $GH_MASK_URLS; then
+            echo "::add-mask::$URI"
+        fi
+
         # Priority order:
         #   - SLE repositories
         #   - SUSE Package Hub
@@ -147,6 +158,7 @@ else
 fi
 
 # Build image
+log info "Building image with KIWI-NG..."
 sudo kiwi-ng $KIWI_GLOBAL_ARGS system build $KIWI_BUILD_ARGS $KIWI_EXTRA_ARGS
 
 DISK_IMAGE_FILE="$(jq -re .disk_image.filename kiwi.result.json)"
