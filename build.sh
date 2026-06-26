@@ -21,7 +21,7 @@ log() {
     echo "[$SCRIPT_NAME] [$uplevel] $*"
 }
 
-ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:,--gh-mask-urls" -n "build.sh" -- "$@")
+ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:,gh-mask-urls" -n "build.sh" -- "$@")
 eval set -- "$ARGS"
 
 GH_MASK_URLS=false
