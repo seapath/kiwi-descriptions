@@ -21,7 +21,7 @@ log() {
     echo "[$SCRIPT_NAME] [$uplevel] $*"
 }
 
-ARGS=$(getopt -o "hse:p:" -l "add-sle,extra-build-args:,profile:" -n "build.sh" -- "$@")
+ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:" -n "build.sh" -- "$@")
 eval set -- "$ARGS"
 
 while true; do
@@ -34,7 +34,8 @@ Arguments:
 Options:
   -s, --add-sle             Add SLE repositories of local system to the built appliance.
                                 Relevant only for SLE-based appliances.
-  -e, --extra-build-args    Extra arguments to pass to the 'kiwi system build' command.
+  -e, --extra-build-args    Extra build arguments to pass to the 'kiwi-ng system build' command.
+  -o, --global-opts         Global options to pass to the 'kiwi-ng' command.
   -p, --profile             Image profile to use. Can be specified multiple times for multiple profiles.
                             Valid profiles:
                                 - hypervisor: Image with packages for hypervisor (e.g., KVM, containers).
@@ -52,6 +53,10 @@ EOF
         ;;
     -e|--extra-build-args)
         KIWI_EXTRA_ARGS="$KIWI_EXTRA_ARGS $2"
+        shift 2
+        ;;
+    -o|--global-opts)
+        KIWI_GLOBAL_ARGS="$KIWI_GLOBAL_ARGS $2"
         shift 2
         ;;
     -p|--profile)
@@ -80,7 +85,6 @@ sudo rm -rf build/image-root
 
 
 KIWI_BUILD_ARGS="--description $KIWI_DESCRIPTION --target-dir ."
-KIWI_GLOBAL_ARGS=""
 
 for p in $KIWI_BUILD_PROFILES; do
     log info "Enabling \"$p\" profile"
