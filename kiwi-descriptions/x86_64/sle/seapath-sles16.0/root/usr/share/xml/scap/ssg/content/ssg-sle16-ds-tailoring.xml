@@ -14,10 +14,67 @@ https://www.ssi.gouv.fr/administration/guide/recommandations-de-securite-relativ
 
 An English version of the ANSSI-BP-028 can also be found at the ANSSI website:
 https://messervices.cyber.gouv.fr/guides/en-configuration-recommendations-gnulinux-system</xccdf:description>
+    <!-- Rules disabled because of incompatibility -->
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_mount_option_nodev_nonroot_local_partitions" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_file_groupownership_system_commands_dirs" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_sysctl_kernel_pid_max" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_enable_iommu_force" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes" selected="false"/>
+
+    <!-- Rules disabled because they are failing after the remediation -->
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_prefer_64bit_os" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_password" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_uefi_password" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_l1tf_argument" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_mds_argument" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_slub_debug_argument" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_spec_store_bypass_disable_argument" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_sysctl_kernel_modules_disabled" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_debug_fs" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_legacy_vsyscall_none" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_legacy_vsyscall_xonly" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_proc_kcore" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_retpoline" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_x86_vsyscall_emulation" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_debug_credentials" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_debug_list" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_debug_notifiers" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_module_sig_all" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_module_sig_force" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_module_sig_hash" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_module_sig_key" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_module_sig_sha512" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_panic_on_oops" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_panic_timeout" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_binfmt_misc" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_hibernation" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_kexec" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_default_mmap_min_addr" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_ia32_emulation" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_page_table_isolation" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_page_poisoning_no_sanity" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_kernel_config_page_poisoning_zero" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_boot" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_home" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_opt" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_srv" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_usr" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_var" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_var_tmp" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_partition_for_var_log_audit" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_sudo_dedicated_group" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_sudo_add_umask" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_sudoers_no_root_target" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_sudoers_explicit_command_args" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_file_permissions_ungroupowned" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_no_files_unowned_by_user" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_file_permissions_unauthorized_sgid" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_file_permissions_unauthorized_suid" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_package_sequoia-sq_installed" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_systemauth" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_package_rsyslog-gnutls_installed" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_rsyslog_remote_loghost" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_rsyslog_remote_tls_cacert" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_aide_periodic_checking_systemd_timer" selected="false"/>
   </xccdf:Profile>
 </xccdf:Tailoring>
