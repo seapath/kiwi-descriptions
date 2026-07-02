@@ -34,6 +34,7 @@
               filesystem="ext4"
               kernelcmdline="console=ttyS0 console=tty0 efi=runtime ipv6.disable=1"
               efipartsize="128"
+              eficsm="false"
               firmware="efi">
 
             <oemconfig>
