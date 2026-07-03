@@ -137,6 +137,8 @@
         <package name="python313-pip"/>
         <package name="python313-setuptools"/>
         <package name="python313"/>
+        <package name="python313-Flask-WTF"/>
+        <package name="python313-Flask"/>
 
         <!-- Tools -->
         <package name="bzip2"/>
