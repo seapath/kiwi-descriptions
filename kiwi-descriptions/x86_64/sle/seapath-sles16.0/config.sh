@@ -13,10 +13,6 @@ test -f /.profile && . /.profile
 echo "uninitialized" > /etc/machine-id
 
 
-# Additional python packages
-python3.13 -m pip install \
-    podman-compose
-
 # Configure pam
 
 install -m 0440 /usr/lib/pam.d/login /etc/pam.d/login
