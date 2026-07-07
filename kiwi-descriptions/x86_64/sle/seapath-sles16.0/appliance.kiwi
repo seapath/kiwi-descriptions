@@ -91,7 +91,6 @@
         <package name="suseconnect-ng"/>
         <package name="sysfsutils"/>
         <package name="sysstat"/>
-        <package name="systemd-networkd"/>
         <package name="systemd"/>
         <package name="timezone"/>
         <package name="ucode-amd"/>
@@ -234,4 +233,6 @@
         <package name="cockpit-packagekit"/>
 
     </packages>
+
+    <include from="this://packages-dynamic.xml"/>
 </image>

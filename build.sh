@@ -185,6 +185,11 @@ else
     rm -rf $KIWI_DESCRIPTION/root/home/ansible/.ssh/authorized_keys
 fi
 
+if [ -f "$KIWI_DESCRIPTION/pre_build.sh" ]; then
+    log info "Running pre-build script..."
+    "$KIWI_DESCRIPTION/pre_build.sh" "$KIWI_DESCRIPTION"
+fi
+
 # Build image
 log info "Building image with KIWI-NG..."
 sudo kiwi-ng $KIWI_GLOBAL_ARGS system build $KIWI_BUILD_ARGS $KIWI_EXTRA_ARGS
