@@ -19,5 +19,18 @@ https://messervices.cyber.gouv.fr/guides/en-configuration-recommendations-gnulin
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_sysctl_kernel_pid_max" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_enable_iommu_force" selected="false"/>
     <xccdf:select idref="xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes" selected="false"/>
+
+    <!-- Conflicts with SEAPATH-00010 - SLUB redzoning and sanity checking enabled on cmdline -->
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_grub2_slub_debug_argument" selected="false"/>
+
+    <!-- Conflicts with SEAPATH-00186 - Check kernel.yama.ptrace_scope is set to 2 -->
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_sysctl_kernel_yama_ptrace_scope" selected="false"/>
+
+    <!-- Conflicts with SEAPATH-00097 - pam password authentication uses sha512 with 65536 rounds or yescrypt -->
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_accounts_password_pam_unix_rounds_password_auth" selected="false"/>
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_systemauth" selected="false"/>
+
+    <!-- Conflicts with SEAPATH-00092 - bash timeout is set read-only to 300s -->
+    <xccdf:select idref="xccdf_org.ssgproject.content_rule_accounts_tmout" selected="false"/>
   </xccdf:Profile>
 </xccdf:Tailoring>
