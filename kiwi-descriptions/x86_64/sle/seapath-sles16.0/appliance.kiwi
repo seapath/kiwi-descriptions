@@ -138,6 +138,7 @@
         <package name="python313"/>
         <package name="python313-Flask-WTF"/>
         <package name="python313-Flask"/>
+        <package name="python313-PyYAML"/>
 
         <!-- Tools -->
         <package name="bzip2"/>
