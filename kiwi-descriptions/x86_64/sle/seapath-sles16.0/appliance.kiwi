@@ -131,14 +131,14 @@
         <package name="net-snmp"/>
 
         <!-- Python 3 -->
-        <package name="python313-cffi"/>
-        <package name="python313-lxml"/>
-        <package name="python313-pip"/>
-        <package name="python313-setuptools"/>
         <package name="python313"/>
+        <package name="python313-cffi"/>
         <package name="python313-Flask-WTF"/>
         <package name="python313-Flask"/>
+        <package name="python313-lxml"/>
+        <package name="python313-pip"/>
         <package name="python313-PyYAML"/>
+        <package name="python313-setuptools"/>
 
         <!-- Tools -->
         <package name="bzip2"/>
