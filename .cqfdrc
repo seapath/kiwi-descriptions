@@ -1,21 +1,11 @@
 [project]
 org='seapath'
 name='seapath-kiwi'
-flavors='
-    clean
-    sles16-seapath-observer
-    sles16-seapath-hypervisor-standalone
-    sles16-seapath-hypervisor-standalone-cockpit
-    sles16-seapath-hypervisor-cluster
-    sles16-seapath-hypervisor-cluster-cockpit
-'
 
 [build]
-distro='sles16.0'
 command='sudo kiwi-ng --help'
 
 [clean]
-distro='sles16.0'
 command='sudo rm -rf \
     build \
     *.changes \
@@ -27,6 +17,26 @@ command='sudo rm -rf \
     *.verified \
     kiwi.result*
 '
+
+[leap16-seapath-observer]
+distro='leap16.0'
+command='./build.sh -f "openSUSE Leap" -p observer kiwi-descriptions/x86_64/leap/seapath-leap16.0'
+
+[leap16-seapath-hypervisor-standalone]
+distro='leap16.0'
+command='./build.sh -f "openSUSE Leap" -p hypervisor kiwi-descriptions/x86_64/leap/seapath-leap16.0'
+
+[leap16-seapath-hypervisor-standalone-cockpit]
+distro='leap16.0'
+command='./build.sh -f "openSUSE Leap" -p hypervisor -p cockpit kiwi-descriptions/x86_64/leap/seapath-leap16.0'
+
+[leap16-seapath-hypervisor-cluster]
+distro='leap16.0'
+command='./build.sh -f "openSUSE Leap" -p hypervisor -p cluster kiwi-descriptions/x86_64/leap/seapath-leap16.0'
+
+[leap16-seapath-hypervisor-cluster-cockpit]
+distro='leap16.0'
+command='./build.sh -f "openSUSE Leap" -p hypervisor -p cluster -p cockpit kiwi-descriptions/x86_64/leap/seapath-leap16.0'
 
 [sles16-seapath-observer]
 distro='sles16.0'
