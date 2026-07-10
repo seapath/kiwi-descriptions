@@ -54,8 +54,9 @@
     </preferences>
 
     <users>
-        <user password="$y$j9T$bJ6sgrKdmHFbz1XRPDvq//$BoFJSE5fcL7v43c2LYEVyMCbn49wk3BIeQM7xGqPzk3" home="/root" name="root" groups="root"/>
-        <user password="$y$j9T$FM5xf5gw4abf1XJXHW6eL.$oE89ZT2VyNb2d6OnICr6Fbo.9xdF9Dl5Wve8ZX/Amn2" name="admin" id="1000" groups="admin"/>
+        <!-- Default password for root and admin is seapath -->
+        <user password="$y$j9T$o1cqUmfzttsbcsnNAtDRW.$7tK9Bzv2UJRz2Z/hfWYMp7IJZKfUKuKn.1aD1aflZFA" home="/root" name="root" groups="root"/>
+        <user password="$y$j9T$o1cqUmfzttsbcsnNAtDRW.$7tK9Bzv2UJRz2Z/hfWYMp7IJZKfUKuKn.1aD1aflZFA" name="admin" id="1000" groups="admin"/>
         <user password="!" name="ansible" id="1005" groups="ansible"/>
 
         <user password="!" name="snmp" id="902" groups="snmp"/>
