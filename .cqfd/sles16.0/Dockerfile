@@ -14,6 +14,7 @@ ENV ADDITIONAL_MODULES=sle-ha,PackageHub
 RUN zypper --gpg-auto-import-keys refresh && zypper install -y --no-recommends \
     binutils \
     gawk \
+    git  \
     gptfdisk \
     jing \
     jq \
