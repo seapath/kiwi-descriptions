@@ -5,4 +5,8 @@
     <packages type="image">
         <package name="systemd-networkd=@@SYSTEMD_VERSION@@"/>
     </packages>
+
+    <packages type="image" profiles="hypervisor">
+        <package name="qemu-block-rbd=@@QEMU_VERSION@@"/>
+    </packages>
 </image>

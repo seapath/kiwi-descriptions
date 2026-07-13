@@ -107,6 +107,7 @@
         <package name="openssh-server"/>
         <package name="openssh"/>
         <package name="openvswitch"/>
+        <!-- systemd-networkd in packages-dynamic.xml -->
         <package name="systemd-resolved"/>
 
         <!-- Time synchronisation (IEEE 1588 / PTP capable) -->
@@ -182,7 +183,7 @@
         <!-- Virtualization -->
         <package name="ovmf"/>
         <package name="qemu-block-curl"/>
-        <package name="qemu-block-rbd"/>
+        <!-- qemu-block-rbd in packages-dynamic.xml -->
         <package name="qemu-img"/>
         <package name="qemu-tools"/>
         <package name="qemu-x86"/>
@@ -235,5 +236,6 @@
 
     </packages>
 
+    <!-- PackageHub packages whose version must be aligned with dependencies in SLES repositories -->
     <include from="this://packages-dynamic.xml"/>
 </image>

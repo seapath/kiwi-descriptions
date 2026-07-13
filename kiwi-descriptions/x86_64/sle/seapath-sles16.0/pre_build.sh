@@ -18,6 +18,8 @@ get_latest_package_version() {
 }
 
 SYSTEMD_VERSION=$(get_latest_package_version systemd)
+QEMU_VERSION=$(get_latest_package_version qemu-x86)
 
 cp $KIWI_DESCRIPTION/packages-dynamic.xml.in $KIWI_DESCRIPTION/packages-dynamic.xml
 sed -i "s/@@SYSTEMD_VERSION@@/${SYSTEMD_VERSION}/g" $KIWI_DESCRIPTION/packages-dynamic.xml
+sed -i "s/@@QEMU_VERSION@@/${QEMU_VERSION}/g" $KIWI_DESCRIPTION/packages-dynamic.xml
