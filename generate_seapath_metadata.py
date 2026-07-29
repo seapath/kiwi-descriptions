@@ -10,21 +10,17 @@ try:
 except TypeError as e:
     raise ValueError("BMAP_FILE environment variable is not set")
 
-ImageName = ""
-ImageDescription = ""
-
 role = environ.get("ROLE")
+flavor = environ.get("FLAVOR", "SLES")
+ImageName = "SEAPATH {} hypervisor".format(flavor)
 
 if "standalone" == role:
-    ImageName = "SEAPATH SLES hypervisor"
     ImageDescription = "A production hypervisor image for a SEAPATH standalone setup"
     setup = "Standalone"
 elif "cluster" == role:
-    ImageName = "SEAPATH SLES hypervisor"
     ImageDescription = "A production hypervisor image for a SEAPATH cluster setup"
     setup = "Cluster"
 elif "observer" == role:
-    ImageName = "SEAPATH SLES observer"
     ImageDescription = "A production observer image for a SEAPATH cluster setup"
     setup = "Cluster"
 else:
@@ -43,7 +39,7 @@ for tag, value in [
     ("ImageVersion", seapath_version),
     ("ImageDescription", ImageDescription),
     ("ImageSetup", setup),
-    ("ImageFlavor", "SLES"),
+    ("ImageFlavor", flavor),
 ]:
     node = ET.SubElement(root, tag)
     node.text = f" {value} "

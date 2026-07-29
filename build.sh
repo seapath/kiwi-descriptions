@@ -22,7 +22,7 @@ log() {
     echo "[$SCRIPT_NAME] [$uplevel] $*"
 }
 
-ARGS=$(getopt -o "hse:o:p:" -l "add-sle,extra-build-args:,global-opts:,profile:,gh-mask-urls" -n "build.sh" -- "$@")
+ARGS=$(getopt -o "hse:o:p:f:" -l "add-sle,extra-build-args:,global-opts:,profile:,gh-mask-urls,flavor:" -n "build.sh" -- "$@")
 eval set -- "$ARGS"
 
 GH_MASK_URLS=false
@@ -50,6 +50,7 @@ Options:
                                             Mutually exclusive with "hypervisor" profile.
                                 - cockpit: Image with packages for cockpit web interface.
       --gh-mask-urls        Mask repositories URLs in Github Action logs.
+  -f, --flavor              Flavor (SLES, Leap, etc.)
   -h                        Show this help message and exit.
 EOF
         exit 0
@@ -97,6 +98,10 @@ EOF
     --gh-mask-urls)
         GH_MASK_URLS=true
         shift
+        ;;
+    -f|--flavor)
+        export FLAVOR=$2
+        shift 2
         ;;
     --)
         shift
