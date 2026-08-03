@@ -178,6 +178,10 @@
         <package name="libvirt-daemon-driver-storage"/>
         <package name="python313-libvirt-python"/>
 
+        <!-- lttng -->
+        <package name="lttng-tools"/>
+        <package name="lttng-ust"/>
+
     </packages>
 
     <packages type="image" profiles="hypervisor">
