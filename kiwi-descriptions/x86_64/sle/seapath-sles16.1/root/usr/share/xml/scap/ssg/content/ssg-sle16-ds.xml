@@ -75125,7 +75125,7 @@ in the previous sections in certain environments the <html:code>ntpd</html:code>
 be preferred to be used rather than the <html:code>chronyd</html:code> one. Refer to:
 
     
-    <html:a href="https://documentation.suse.com/sles/16.0/html/SLES-ntp-time-synchronization/index.html">https://documentation.suse.com/sles/16.0/html/SLES-ntp-time-synchronization/index.html</html:a>
+    <html:a href="https://documentation.suse.com/sles/16.1/html/SLES-ntp-time-synchronization/index.html">https://documentation.suse.com/sles/16.1/html/SLES-ntp-time-synchronization/index.html</html:a>
 
 for guidance which NTP daemon to choose depending on the environment used.</xccdf-1.2:description>
             <xccdf-1.2:reference href="https://www.cisecurity.org/controls/">1</xccdf-1.2:reference>
