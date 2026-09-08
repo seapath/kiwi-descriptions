@@ -1,7 +1,7 @@
 # Copyright (C) 2026 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
-name: SEAPATH SLES 16.0 CI Build
+name: SEAPATH SLES 16.1 CI Build
 
 on:
   workflow_run:
@@ -65,13 +65,13 @@ jobs:
         uses: LouisBrunner/checks-action@dfcbcf801bff1ea7f1414824fc28f2cd697b35da
         with:
           token: "${{ github.token }}"
-          name: "SEAPATH SLES 16.0 CI Build / build (${{ matrix.image_type }} / ${{ matrix.cockpit }})"
+          name: "SEAPATH SLES 16.1 CI Build / build (${{ matrix.image_type }} / ${{ matrix.cockpit }})"
           sha: "${{ steps.pr-metadata.outputs.sha }}"
           status: "in_progress"
           details_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           output: |
             {
-              "summary": "Building SEAPATH SLES 16.0 ${{ matrix.image_type }} / ${{ matrix.cockpit }} image"
+              "summary": "Building SEAPATH SLES 16.1 ${{ matrix.image_type }} / ${{ matrix.cockpit }} image"
             }
 
       - name: Checkout repository
