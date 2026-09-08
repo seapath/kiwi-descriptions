@@ -14,7 +14,7 @@ https://osinside.github.io/kiwi/[KIWI NG].
 
 Currently, this repository provides image descriptions for the following SEAPATH flavors:
 
-* SEAPATH SLES 16.0
+* SEAPATH SLES 16.1
 
 
 == Prerequisites
@@ -77,8 +77,8 @@ NOTE: This documentation doesn't cover in detail the build process without CQFD.
 
 When building SEAPATH SLES images, you need to have on the build system:
 
-* For SEAPATH SLES 16.0, an active SUSE Linux Enterprise registration.
-* In addition for SEAPATH SLES 16.0 cluster images, an active SUSE Linux Enterprise Server High Availability Extension registration.
+* For SEAPATH SLES 16.1, an active SUSE Linux Enterprise registration.
+* In addition for SEAPATH SLES 16.1 cluster images, an active SUSE Linux Enterprise Server High Availability Extension registration.
 
 This is required to access the necessary repositories and packages for the build process.
 
@@ -100,17 +100,17 @@ This can be done using the official SUSE Base Container Image:
         cp /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64 /output/SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64; \
         chmod 644 /output/SCCcredentials /output/SUSE_Linux_Enterprise_High_Availability_Extension_<version>_x86_64"
 
-For exemple, if building for SEAPATH SLES 16.0, you should run:
+For exemple, if building for SEAPATH SLES 16.1, you should run:
 
   $ docker run --rm \
-        -v $(pwd)/.cqfd/sles16.0:/output \
-        registry.suse.com/bci/bci-base:16.0 bash -c " \
+        -v $(pwd)/.cqfd/sles16.1:/output \
+        registry.suse.com/bci/bci-base:16.1 bash -c " \
         zypper -n in SUSEConnect; \
-        SUSEConnect --regcode <your-registration-code> -p SLES/16.0/x86_64; \
-        SUSEConnect --regcode <your-additional-registration-code> -p sle-ha/16.0/x86_64; \
+        SUSEConnect --regcode <your-registration-code> -p SLES/16.1/x86_64; \
+        SUSEConnect --regcode <your-additional-registration-code> -p sle-ha/16.1/x86_64; \
         cp /etc/zypp/credentials.d/SCCcredentials /output/SCCcredentials; \
-        cp /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64 /output/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64; \
-        chmod 644 /output/SCCcredentials /output/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64"
+        cp /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_16.1_x86_64 /output/SUSE_Linux_Enterprise_High_Availability_Extension_16.1_x86_64; \
+        chmod 644 /output/SCCcredentials /output/SUSE_Linux_Enterprise_High_Availability_Extension_16.1_x86_64"
 
 Once the credential files are generated and placed in the correct `.cqfd/sles<version>/` directory,
 CQFD will automatically use them to connect to the SUSE Customer Center during
@@ -125,10 +125,10 @@ documentation.
 When building without CQFD, you can directly register to the SUSE Customer Center on the build system
 using the `SUSEConnect` command-line tool.
 
-For SEAPATH SLES 16.0, run:
+For SEAPATH SLES 16.1, run:
 
-  $ SUSEConnect --regcode <your-registration-code> -p SLES/16.0/x86_64
-  $ SUSEConnect --regcode <your-additional-registration-code> -p sle-ha/16.0/x86_64
+  $ SUSEConnect --regcode <your-registration-code> -p SLES/16.1/x86_64
+  $ SUSEConnect --regcode <your-additional-registration-code> -p sle-ha/16.1/x86_64
 
 For more information about SLE registration, please refer to the
 https://documentation.suse.com/fr-fr/sles/15-SP6/html/SLES-all/cha-register-sle.html[official SUSE documentation].
@@ -175,12 +175,12 @@ The following instructions suppose that you are building with CQFD.
 Identify the CQFD flavor corresponding to the SEAPATH image you want to build.
 For now the following flavors are available:
 
-* SEAPATH SLES 16.0
-** `sles16-seapath-hypervisor-standalone`: SEAPATH SLES 16.0 standalone hypervisor image.
-** `sles16-seapath-hypervisor-standalone-cockpit`: SEAPATH SLES 16.0 standalone hypervisor image with Cockpit.
-** `sles16-seapath-hypervisor-cluster`: SEAPATH SLES 16.0 cluster hypervisor image.
-** `sles16-seapath-hypervisor-cluster-cockpit`: SEAPATH SLES 16.0 cluster hypervisor image with Cockpit.
-** `sles16-seapath-observer`: SEAPATH SLES 16.0 observer image for use in a SEAPATH cluster.
+* SEAPATH SLES 16.1
+** `sles16-seapath-hypervisor-standalone`: SEAPATH SLES 16.1 standalone hypervisor image.
+** `sles16-seapath-hypervisor-standalone-cockpit`: SEAPATH SLES 16.1 standalone hypervisor image with Cockpit.
+** `sles16-seapath-hypervisor-cluster`: SEAPATH SLES 16.1 cluster hypervisor image.
+** `sles16-seapath-hypervisor-cluster-cockpit`: SEAPATH SLES 16.1 cluster hypervisor image with Cockpit.
+** `sles16-seapath-observer`: SEAPATH SLES 16.1 observer image for use in a SEAPATH cluster.
 
 NOTE: When building a SLE based SEAPATH image, make sure to first configure your SLE registration.
 See the <<sle-registration>> section.
@@ -191,7 +191,7 @@ See the <<sle-registration>> section.
 
   $ cqfd -b <cqfd-flavor> init
 
-For exemple, when building the SEAPATH SLES 16.0 standalone hypervisors image;
+For exemple, when building the SEAPATH SLES 16.1 standalone hypervisors image;
 
   $ cqfd -b sles16-seapath-hypervisor-standalone init
 
@@ -199,7 +199,7 @@ For exemple, when building the SEAPATH SLES 16.0 standalone hypervisors image;
 
   $ cqfd -b <cqfd-flavor>
 
-For exemple, when building the SEAPATH SLES 16.0 standalone hypervisors image;
+For exemple, when building the SEAPATH SLES 16.1 standalone hypervisors image;
 
   $ cqfd -b sles16-seapath-hypervisor-standalone
 
