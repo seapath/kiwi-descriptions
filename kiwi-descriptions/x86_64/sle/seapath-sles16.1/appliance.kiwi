@@ -110,7 +110,6 @@
         <package name="openssh"/>
         <package name="openvswitch"/>
         <!-- systemd-networkd in packages-dynamic.xml -->
-        <package name="systemd-resolved"/>
 
         <!-- Time synchronisation (IEEE 1588 / PTP capable) -->
         <package name="chrony"/>
