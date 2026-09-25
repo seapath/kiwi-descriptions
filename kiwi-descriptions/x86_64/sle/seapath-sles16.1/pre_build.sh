@@ -12,7 +12,7 @@ get_latest_package_version() {
     # Fourth field is the version.
     # Zypper already sorts packages from the latest version to the oldest.
     zypper -q se -x --details $1 | tail -n+4 |\
-        grep "SLE-Product" |\
+        grep -E "SLE-Product|Backport" |\
         head -n1 | cut -d'|' -f4 |\
         tr -d " "
 }

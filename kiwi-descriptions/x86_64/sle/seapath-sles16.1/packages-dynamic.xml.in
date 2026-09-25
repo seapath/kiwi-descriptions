@@ -3,7 +3,9 @@
 
 <image>
     <packages type="image">
+        <package name="systemd=@@SYSTEMD_VERSION@@"/>
         <package name="systemd-networkd=@@SYSTEMD_VERSION@@"/>
+        <package name="systemd-resolved=@@SYSTEMD_VERSION@@"/>
     </packages>
 
     <packages type="image" profiles="hypervisor">

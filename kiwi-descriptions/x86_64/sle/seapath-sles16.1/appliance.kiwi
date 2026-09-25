@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2026 Savoir-faire Linux, Inc-->
 
-<image schemaversion="8.0" name="seapath-sles16.0">
+<image schemaversion="8.0" name="seapath-sles16.1">
     <description type="system">
         <license>Apache-2.0</license>
         <author>Elinor Montmasson</author>
@@ -110,7 +110,6 @@
         <package name="openssh"/>
         <package name="openvswitch"/>
         <!-- systemd-networkd in packages-dynamic.xml -->
-        <package name="systemd-resolved"/>
 
         <!-- Time synchronisation (IEEE 1588 / PTP capable) -->
         <package name="chrony"/>

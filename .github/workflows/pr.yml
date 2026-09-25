@@ -7,10 +7,10 @@ on:
   # With the"pull_request" trigger, workflows triggered by PRs made from forks
   # are executed in a "safe" context without access to secrets.
   # Since we need the secret necessary to access SLES repositories during build,
-  # ci-build-sles16.0 is triggered via the workflow_run event when this pr workflow runs.
-  # This allow ci-build-sles16.0 to get the necessary secret permissions.
+  # ci-build-sles16.1 is triggered via the workflow_run event when this pr workflow runs.
+  # This allow ci-build-sles16.1 to get the necessary secret permissions.
   # Thus, this "Pull Requests" workflow does nothing except uploading some
-  # metadata used by ci-build-sles16.0 to checkout the PR.
+  # metadata used by ci-build-sles16.1 to checkout the PR.
   # N.B. we cannot use the pull_request_target trigger since it does not wait
   # for approval of reviewers, which is a big security issue.
 

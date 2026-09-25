@@ -1,14 +1,14 @@
 # Copyright (C) 2026 Savoir-faire Linux, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
-FROM registry.suse.com/bci/bci-base:16.0
+FROM registry.suse.com/bci/bci-base:16.1
 
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8
 
 ADD SCCcredentials /etc/zypp/credentials.d/SCCcredentials
-ADD SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64 /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_16.0_x86_64
+ADD SUSE_Linux_Enterprise_High_Availability_Extension_16.1_x86_64 /etc/zypp/credentials.d/SUSE_Linux_Enterprise_High_Availability_Extension_16.1_x86_64
 ENV ADDITIONAL_MODULES=sle-ha,PackageHub
 
 RUN zypper --gpg-auto-import-keys refresh && zypper install -y --no-recommends \
