@@ -84,6 +84,7 @@
         <package name="dracut-kiwi-oem-repart"/>
         <package name="dracut"/>
         <package name="e2fsprogs"/>
+        <package name="hostname"/>
         <package name="lvm2"/>
         <package name="parted"/>
         <package name="patch"/>
