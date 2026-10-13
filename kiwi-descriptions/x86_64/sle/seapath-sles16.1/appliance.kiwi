@@ -176,6 +176,7 @@
         <package name="libvirt-daemon-driver-qemu"/>
         <package name="libvirt-daemon-driver-secret"/>
         <package name="libvirt-daemon-driver-storage"/>
+        <package name="libvirt-dbus"/>
         <package name="python313-libvirt-python"/>
 
     </packages>
